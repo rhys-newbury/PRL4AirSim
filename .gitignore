@@ -402,3 +402,5 @@ PythonClient/docs/_build
 
 # clangd generated folder, for e.g. from VSCode clangd extension
 .cache/
+.mypy_cache/3.8
+wandb/*
