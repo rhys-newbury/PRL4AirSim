@@ -28,8 +28,8 @@
    "SubWindows": [
     {"WindowID": 0, "CameraID": 1, "ImageType": 0, "Visible": true},
     {"WindowID": 1, "CameraID": 2, "ImageType": 0, "Visible": true},
-    {"WindowID": 2, "CameraID": 2, "ImageType": 3, "Visible": true}	
-  ], 
+    {"WindowID": 2, "CameraID": 2, "ImageType": 3, "Visible": true}
+  ],
   "Recording": {
     "RecordOnMove": true,
     "RecordInterval": 1,
@@ -38,5 +38,5 @@
         { "CameraID": 2, "ImageType": 0, "PixelsAsFloat": false, "Compress": true },
 		{ "CameraID": 2, "ImageType": 3, "PixelsAsFloat": false, "Compress": false }
     ]
-  } 
+  }
 }

@@ -8,7 +8,7 @@ Click the blue button to start the Azure deployment (The template is pre-filled 
 
 <a href="https://aka.ms/AA8umgt" target="_blank">
     <img src="https://azuredeploy.net/deploybutton.png"/>
-</a>  
+</a>
 *Note: the VM deployment and configuration process may take 20+ minutes to complete*
 
 ### Regarding the deployment of the Azure VM
@@ -34,8 +34,8 @@ az vm deallocate --resource-group MyResourceGroup --name MyVMName
 
 ## Code and debug from a local Visual Studio Code and connect to AirSim via forwarded ports
 
-*Note: this scenario, will be using two Visual Studio Code instances. 
-The first one will be used as a bridge to forward ports via SSH to the Azure VM and execute remote processes, and the second one will 
+*Note: this scenario, will be using two Visual Studio Code instances.
+The first one will be used as a bridge to forward ports via SSH to the Azure VM and execute remote processes, and the second one will
 be used for local Python development.
 To be able to reach the VM from the local Python code, it is required to keep the `Remote - SSH` instance of Visual Studio Code opened, while working with the local Python environment on the second instance*
 
@@ -46,7 +46,7 @@ To be able to reach the VM from the local Python code, it is required to keep th
 - Open a second Visual Studio Code instance, without disconnecting or closing the first one
 - Either clone this repository locally and open *just the `azure` folder* in Visual Studio Code, or create a brand new repository, clone it and copy the contents of the `azure` folder from this repository in it.
 - Run `pip install -r requirements.txt` inside the `app` directory
-- Open the `multirotor.py` file inside the `app` directory 
+- Open the `multirotor.py` file inside the `app` directory
 - Start debugging with Python
 - When finished, remember to stop an deallocate the Azure VM to avoid extra charges
 
@@ -57,7 +57,7 @@ This would be a perfect scenario when you want to run the simulation at scale. F
 
 Since AirSim requires access to the host GPU, it is required to use a Docker runtime that supports it. For more information about running AirSim in Docker, click [here](docker_ubuntu.md).
 
-When using Azure Container Services to run this image, the only extra-requirement is to add GPU support to the Container Group where it will be deployed. 
+When using Azure Container Services to run this image, the only extra-requirement is to add GPU support to the Container Group where it will be deployed.
 
 It can use either public docker images from DockerHub or images deployed to a private Azure Container Registry
 
@@ -77,7 +77,7 @@ Once you have a zip file with the new AirSim environment (or prefer to use one f
 
 If you are using the docker image, you also need a linux binary zip file and modify the following Docker-related files:
 - In [`azure/docker/Dockerfile`](https://github.com/microsoft/AirSim/blob/master/azure/docker/Dockerfile), modify the `AIRSIM_BINARY_ZIP_URL` and `AIRSIM_BINARY_ZIP_FILENAME` ENV declarations with the new values
-- In [`azure/docker/docker-entrypoint.sh`](https://github.com/microsoft/AirSim/blob/master/azure/docker/docker-entrypoint.sh), modify `AIRSIM_EXECUTABLE` with the new value 
+- In [`azure/docker/docker-entrypoint.sh`](https://github.com/microsoft/AirSim/blob/master/azure/docker/docker-entrypoint.sh), modify `AIRSIM_EXECUTABLE` with the new value
 
 ## Maintaining this development environment
 

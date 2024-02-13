@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LogViewer.Controls"
-        xmlns:map="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF" 
+        xmlns:map="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
         mc:Ignorable="d"
         Title="PX4 Log Viewer" Height="600" Width="1028" Icon="Graph.ico">
     <Window.Resources>
@@ -15,9 +15,9 @@
         </DataTemplate>
         <DataTemplate x:Key="ContainerLogItemSchemaTemplate" >
             <Expander Header="{Binding Path=Name}" Expanded="OnItemExpanded" Collapsed="OnItemCollapsed">
-                <ListView ItemTemplateSelector="{StaticResource HierarchicalLogItemSchemaTemplateSelector}" BorderThickness="0" 
-                          Style="{StaticResource NavigationList}"                         
-                      SelectionChanged="OnChildListItemSelected" 
+                <ListView ItemTemplateSelector="{StaticResource HierarchicalLogItemSchemaTemplateSelector}" BorderThickness="0"
+                          Style="{StaticResource NavigationList}"
+                      SelectionChanged="OnChildListItemSelected"
                       ItemContainerStyleSelector="{StaticResource HierarchicalLogItemSchemaStyleSelector}"
                       local:PassthroughMouseWheelBehavior.PassthroughMouseWheel="True">
                 </ListView>
@@ -120,7 +120,7 @@
             <ListView x:Name="CategoryList" SelectionChanged="OnListItemSelected" BorderThickness="0"
                        ItemTemplate="{StaticResource ContainerLogItemSchemaTemplate}"
                        ItemContainerStyle="{StaticResource ContainerListItemStyle}"
-                       Style="{StaticResource NavigationList}"  
+                       Style="{StaticResource NavigationList}"
                        local:PassthroughMouseWheelBehavior.PassthroughMouseWheel="True"
                        PreviewMouseRightButtonDown="OnRightClickCategoryList"
                        ScrollViewer.CanContentScroll="False">

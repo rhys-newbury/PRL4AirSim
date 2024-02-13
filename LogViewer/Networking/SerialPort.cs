@@ -11,7 +11,7 @@ namespace Microsoft.Networking
     public class SerialPort : IPort
     {
         System.IO.Ports.SerialPort port;
-        
+
         public void Connect(string portName, int baudRate)
         {
             Close();
@@ -62,7 +62,7 @@ namespace Microsoft.Networking
                 {
                     foreach (ManagementObject obj2 in searcher.Get())
                     {
-                        //DeviceID       
+                        //DeviceID
                         string id = obj2.Properties["DeviceID"].Value.ToString();
                         string name = obj2.Properties["Name"].Value.ToString();
                         ports.Add(new SerialPort() { Id = id, Name = name });

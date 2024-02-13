@@ -27,13 +27,13 @@
   "Gimbal": {
     "Stabilization": 1,
     "Pitch": 0, "Roll": 1, "Yaw": 0
-  } 
+  }
   },
    "SubWindows": [
     {"WindowID": 0, "CameraID": 1, "ImageType": 0, "Visible": true},
     {"WindowID": 1, "CameraID": 2, "ImageType": 0, "Visible": true},
-    {"WindowID": 2, "CameraID": 2, "ImageType": 3, "Visible": true}	
-  ], 
+    {"WindowID": 2, "CameraID": 2, "ImageType": 3, "Visible": true}
+  ],
   "Recording": {
     "RecordOnMove": true,
     "RecordInterval": 1,
@@ -42,5 +42,5 @@
         { "CameraID": 1, "ImageType": 0, "PixelsAsFloat": false, "Compress": true },
 		{ "CameraID": 2, "ImageType": 0, "PixelsAsFloat": false, "Compress": true }
     ]
-  } 
+  }
 }

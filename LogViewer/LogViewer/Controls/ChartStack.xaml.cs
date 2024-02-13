@@ -63,7 +63,7 @@ namespace LogViewer.Controls
         }
 
         public void ClearCharts()
-        {            
+        {
             foreach (var chart in FindCharts())
             {
                 chart.Close();
@@ -105,7 +105,7 @@ namespace LogViewer.Controls
             {
                 int now = Environment.TickCount;
                 int timeDelta = now - mouseDownTime;
-                                    
+
                 Point pos = e.GetPosition(this);
 
                 double x = Math.Min(pos.X, mouseDownPos.X);

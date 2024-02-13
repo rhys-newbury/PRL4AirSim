@@ -1,4 +1,4 @@
-<launch> 
+<launch>
 
 <!-- AirSim ROS Wrapper -->
 	<include file="$(find airsim_ros_pkgs)/launch/airsim_node.launch"/>

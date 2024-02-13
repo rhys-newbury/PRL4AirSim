@@ -25,4 +25,3 @@ The new Vehicles element allows to specify which vehicles to create. To use PX4,
 
 ### AdditionalCameras
 The old `AdditionalCameras` setting is now replaced by [Cameras element](settings.md#Common_Vehicle_Setting) within vehicle setting.
-

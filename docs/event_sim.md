@@ -28,7 +28,7 @@ from event_simulator import *
 ev_sim = EventSimulator(W, H)
 ```
 
-The actual computation of the events is triggered through an `image_callback` function, which is executed every time a new RGB image is obtained. The first time this function is called, due to the lack of a 'previous' image, it acts as an initialization of the event sim. 
+The actual computation of the events is triggered through an `image_callback` function, which is executed every time a new RGB image is obtained. The first time this function is called, due to the lack of a 'previous' image, it acts as an initialization of the event sim.
 
 ```
 event_img, events = ev_sim.image_callback(img, ts_delta)
@@ -47,9 +47,9 @@ Note: There is also currently a max limit on the number of events generated per 
 
 #### Algorithm
 The working of the event simulator loosely follows this set of operations:
-1. Take the difference between the log intensities of the current and previous frames.  
-2. Iterating over all pixels, calculate the polarity for each each pixel based on a threshold of change in log intensity.  
-3. Determine the number of events to be fired per pixel, based on extent of intensity change over the threshold. Let $N_{max}$ be the maximum number of events that can occur at a single pixel, then the total number of firings to be simulated at pixel location $u$ would be $N_e(u) = min(N_{max}, \frac{\Delta L(u)}{TOL})$.  
-4. Determine the timestamps for each interpolated event by interpolating between the amount of time that has elapsed between the captures of the previous and current images.  
-$t = t_{prev} + \frac{\Delta T}{N_e(u)}$  
+1. Take the difference between the log intensities of the current and previous frames.
+2. Iterating over all pixels, calculate the polarity for each each pixel based on a threshold of change in log intensity.
+3. Determine the number of events to be fired per pixel, based on extent of intensity change over the threshold. Let $N_{max}$ be the maximum number of events that can occur at a single pixel, then the total number of firings to be simulated at pixel location $u$ would be $N_e(u) = min(N_{max}, \frac{\Delta L(u)}{TOL})$.
+4. Determine the timestamps for each interpolated event by interpolating between the amount of time that has elapsed between the captures of the previous and current images.
+$t = t_{prev} + \frac{\Delta T}{N_e(u)}$
 5. Generate the output bytestream by simulating events at every pixel and sort by timestamp.

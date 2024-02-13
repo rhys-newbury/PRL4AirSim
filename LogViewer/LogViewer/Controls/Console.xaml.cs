@@ -72,7 +72,7 @@ namespace LogViewer.Controls
             {
                 // this is an ERASE_END_LINE command which we ignore.
                 text = text.Substring(0, len - 3);
-            }            
+            }
             Paragraph last = doc.Blocks.LastBlock as Paragraph;
             if (last == null)
             {
@@ -119,7 +119,7 @@ namespace LogViewer.Controls
             run.Text += text;
 
             // scroll to end.
-            ConsoleTextBox.Selection.Select(ConsoleTextBox.Document.ContentEnd, ConsoleTextBox.Document.ContentEnd);            
+            ConsoleTextBox.Selection.Select(ConsoleTextBox.Document.ContentEnd, ConsoleTextBox.Document.ContentEnd);
             ConsoleTextBox.ScrollToEnd();
         }
 
@@ -201,7 +201,7 @@ namespace LogViewer.Controls
                 }
                 if (pos < history.Count && history[pos] == text)
                 {
-                    // then we are replaying history, so rewrite history 
+                    // then we are replaying history, so rewrite history
                 }
                 else
                 {
@@ -220,7 +220,7 @@ namespace LogViewer.Controls
                 int len = selection.GetTextRunLength(LogicalDirection.Backward);
                 if (len > 1)
                 {
-                    // remove the text 
+                    // remove the text
                     selection.GetPositionAtOffset(-1).DeleteTextInRun(1);
                 }
                 e.Handled = true;

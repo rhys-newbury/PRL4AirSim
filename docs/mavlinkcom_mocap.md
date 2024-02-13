@@ -15,11 +15,11 @@ See [Rigid_Body_Tracking](http://wiki.optitrack.com/index.php?title=Rigid_Body_T
 ### MavLinkTest
 
 Use MavLinkTest to talk to your PX4 drone, with "-server:addr:port", for example, when connected
-to drone wifi use: 
+to drone wifi use:
 
-    MavLinkMoCap -server:10.42.0.228:14590 "-project:D:\OptiTrack\Motive Project 2016-12-19 04.09.42 PM.ttp" 
+    MavLinkMoCap -server:10.42.0.228:14590 "-project:D:\OptiTrack\Motive Project 2016-12-19 04.09.42 PM.ttp"
 
-This publishes the ATT_POS_MOCAP messages and you can proxy those through to the PX4 by running 
+This publishes the ATT_POS_MOCAP messages and you can proxy those through to the PX4 by running
 MavLinkTest on the dronebrain using:
 
     MavLinkTest -serial:/dev/ttyACM0,115200 -proxy:10.42.0.228:14590

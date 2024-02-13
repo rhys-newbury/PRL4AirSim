@@ -1,7 +1,7 @@
 ﻿cmake_minimum_required(VERSION 3.5.0)
 project(AirLib)
 
-LIST(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/../cmake-modules") 
+LIST(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/../cmake-modules")
 INCLUDE("${CMAKE_CURRENT_LIST_DIR}/../cmake-modules/CommonSetup.cmake")
 CommonSetup()
 
@@ -14,7 +14,7 @@ include_directories(
   ${RPC_LIB_INCLUDES}
 )
 
-file(GLOB_RECURSE ${PROJECT_NAME}_sources 
+file(GLOB_RECURSE ${PROJECT_NAME}_sources
   ${AIRSIM_ROOT}/${PROJECT_NAME}/src/api/*.cpp
   ${AIRSIM_ROOT}/${PROJECT_NAME}/src/common/common_utils/*.cpp
   ${AIRSIM_ROOT}/${PROJECT_NAME}/src/safety/*.cpp

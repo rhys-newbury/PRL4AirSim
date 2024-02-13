@@ -42,8 +42,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7ef6019d2a42db14cadb432a6c6cc7d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   snowParticleSystem: {fileID: 7137805003512388501}
 --- !u!1001 &8301748675695978906
 PrefabInstance:

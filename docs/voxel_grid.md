@@ -1,4 +1,4 @@
-AirSim provides a feature that constructs ground truth voxel grids of the world directly from Unreal Engine. A voxel grid is a representation of the occupancy of a given world/map, by discretizing into cells of a certain size; and recording a voxel if that particular location is occupied. 
+AirSim provides a feature that constructs ground truth voxel grids of the world directly from Unreal Engine. A voxel grid is a representation of the occupancy of a given world/map, by discretizing into cells of a certain size; and recording a voxel if that particular location is occupied.
 
 The logic for constructing the voxel grid is in WorldSimApi.cpp->createVoxelGrid(). For now, the assumption is that the voxel grid is a cube - and the API call from Python is of the structure:
 
@@ -17,7 +17,7 @@ Within `createVoxelGrid()`, the main Unreal Engine function that returns occupan
 OverlapBlockingTestByChannel(position, rotation, ECollisionChannel, FCollisionShape, params);
 ```
 
-This function is called on the positions of all the 'cells' we wish to discretize the map into, and the returned occupancy result is collected into an array `voxel_grid_`. The indexing of the cell occupancy values follows the convention of the [binvox](https://www.patrickmin.com/binvox/binvox.html) format. 
+This function is called on the positions of all the 'cells' we wish to discretize the map into, and the returned occupancy result is collected into an array `voxel_grid_`. The indexing of the cell occupancy values follows the convention of the [binvox](https://www.patrickmin.com/binvox/binvox.html) format.
 
 ```
 for (float i = 0; i < ncells_x; i++) {

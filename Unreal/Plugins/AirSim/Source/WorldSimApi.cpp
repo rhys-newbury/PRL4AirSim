@@ -296,7 +296,7 @@ void WorldSimApi::resetVehicle(const std::string& vehicle_name, const msr::airli
     UAirBlueprintLib::RunCommandOnGameThread([this, vehicle_name, pose]() {
         //getApiProvider()->getVehicleSimApis()
         auto* vehicle = simmode_->getApiProvider()->getVehicleSimApi(vehicle_name);
-        
+
         //auto* vehicle = simmode_->getApiProvider()->getVehicleApi()->getVehicleSimApi(vehicle_name);
         if (vehicle != nullptr) {
             vehicle->reset();
@@ -947,13 +947,13 @@ void WorldSimApi::setLogFileLocation(const std::string& file_name)
 
 std::vector<msr::airlib::ImageCaptureBase::ImageResponse> WorldSimApi::getBatchImages(const std::vector<ImageCaptureBase::ImageRequest>& requests, const msr::airlib::vector<std::string>& vehicle_names) const
 {
-    
+
     std::vector<msr::airlib::ImageCaptureBase::ImageResponse> responses;
     std::vector<std::shared_ptr<RenderRequest::RenderParams>> render_params;
     std::vector<std::shared_ptr<RenderRequest::RenderResult>> render_results;
 
     bool visibilityChanged = false;
-    
+
     for (unsigned int i = 0; i < requests.size(); ++i) {
         ImageCaptureBase::ImageRequest request = requests.at(i);
         std::string vehicle_name = vehicle_names.at(i);
@@ -1023,7 +1023,7 @@ std::vector<msr::airlib::ImageCaptureBase::ImageResponse> WorldSimApi::getBatchI
         response.time_stamp = render_results[i]->time_stamp;
         response.image_data_uint8 = std::vector<uint8_t>(render_results[i]->image_data_uint8.GetData(), render_results[i]->image_data_uint8.GetData() + render_results[i]->image_data_uint8.Num());
         response.image_data_float = std::vector<float>(render_results[i]->image_data_float.GetData(), render_results[i]->image_data_float.GetData() + render_results[i]->image_data_float.Num());
-        
+
         response.pixels_as_float = request.pixels_as_float;
         response.compress = request.compress;
         response.width = render_results[i]->width;

@@ -151,7 +151,7 @@ namespace LogViewer.Model
                     //    Debug.WriteLine("StartTime={0}, EndTime={1}, Duration={2}", startTime.ToString(), endTime.ToString(), duration.ToString());
                     //}
 
-                    //CreateSchema(log);                
+                    //CreateSchema(log);
             });
 
             //this.data = rows;

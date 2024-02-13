@@ -61,7 +61,7 @@ namespace LogViewer.Controls
             }
             return result;
         }
-        
+
         internal bool ComputeScale(SimpleLineChart trigger)
         {
             bool changed = false;

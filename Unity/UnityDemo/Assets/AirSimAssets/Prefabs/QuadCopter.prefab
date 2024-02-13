@@ -1433,8 +1433,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c48225d48417d5d4cb478d7a050df49c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   effect: 0
   effectsShader: {fileID: 4800000, guid: e03150fb5e358274881026fc928ae40f, type: 3}
 --- !u!114 &114101639218931136
@@ -1446,8 +1446,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 615ac14277735c943abf90a1d259a7cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   rotors:
   - {fileID: 4472859347633780}
   - {fileID: 4253307352233798}
@@ -1462,9 +1462,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5d488591858471a4bbef459e45d9a839, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cameraName: 
+  m_Name:
+  m_EditorClassIdentifier:
+  cameraName:
 --- !u!114 &114147707125306546
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1474,8 +1474,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c48225d48417d5d4cb478d7a050df49c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   effect: 3
   effectsShader: {fileID: 4800000, guid: e03150fb5e358274881026fc928ae40f, type: 3}
 --- !u!114 &114149927038814374
@@ -1487,9 +1487,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5d488591858471a4bbef459e45d9a839, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cameraName: 
+  m_Name:
+  m_EditorClassIdentifier:
+  cameraName:
 --- !u!114 &114168518036985280
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1499,8 +1499,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c48225d48417d5d4cb478d7a050df49c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   effect: 0
   effectsShader: {fileID: 4800000, guid: e03150fb5e358274881026fc928ae40f, type: 3}
 --- !u!114 &114458516621666736
@@ -1512,8 +1512,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c48225d48417d5d4cb478d7a050df49c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   effect: 5
   effectsShader: {fileID: 4800000, guid: e03150fb5e358274881026fc928ae40f, type: 3}
 --- !u!114 &114539930922542708
@@ -1525,8 +1525,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c48225d48417d5d4cb478d7a050df49c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   effect: 0
   effectsShader: {fileID: 4800000, guid: e03150fb5e358274881026fc928ae40f, type: 3}
 --- !u!114 &114572409543757894
@@ -1538,8 +1538,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c48225d48417d5d4cb478d7a050df49c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   effect: 0
   effectsShader: {fileID: 4800000, guid: e03150fb5e358274881026fc928ae40f, type: 3}
 --- !u!114 &114587675436891882
@@ -1551,8 +1551,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c48225d48417d5d4cb478d7a050df49c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   effect: 0
   effectsShader: {fileID: 4800000, guid: e03150fb5e358274881026fc928ae40f, type: 3}
 --- !u!114 &114816376854480686
@@ -1564,8 +1564,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5d488591858471a4bbef459e45d9a839, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   cameraName: 0
 --- !u!114 &114886120419057840
 MonoBehaviour:
@@ -1576,8 +1576,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c48225d48417d5d4cb478d7a050df49c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   effect: 0
   effectsShader: {fileID: 4800000, guid: e03150fb5e358274881026fc928ae40f, type: 3}
 --- !u!114 &114887151363637284
@@ -1589,8 +1589,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5d488591858471a4bbef459e45d9a839, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   cameraName: 1
 --- !u!114 &114913945145302402
 MonoBehaviour:
@@ -1601,6 +1601,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5d488591858471a4bbef459e45d9a839, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cameraName: 
+  m_Name:
+  m_EditorClassIdentifier:
+  cameraName:

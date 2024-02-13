@@ -1,11 +1,14 @@
 import random
 from collections import namedtuple, deque
 
-#state_image, state_velocity, action, next_state_image, next_state_velocity, reward, not_done
-Transition = namedtuple('Transition', ('state', 'action', 'next_state', 'reward', 'not_done'))
+# state_image, state_velocity, action, next_state_image, next_state_velocity, reward, not_done
+Transition = namedtuple(
+    "Transition", ("state", "action", "next_state", "reward", "not_done")
+)
+
 
 class ReplayMemory(object):
-    def __init__(self, maxSize : int):
+    def __init__(self, maxSize: int):
         self.maxSize = maxSize
         self.pushCounter = 0
         self.memory = deque([], maxlen=self.maxSize)

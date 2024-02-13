@@ -11,7 +11,7 @@ By default AirSim prompts user for which vehicle to use. You can easily change t
 
 Now when you restart AirSim, you should see the car spawned automatically.
 
-## Manual Driving 
+## Manual Driving
 Please use the keyboard arrow keys to drive manually. Spacebar for the handbrake. In manual drive mode, gears are set in "auto".
 
 ## Using APIs

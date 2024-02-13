@@ -19,13 +19,13 @@ target = home
 target.latitude -= 1
 
 result = client.simTestLineOfSightToPoint(target)
-print("test line of sight from vehicle to\n%s\n\t:%s" %(target, result))
+print("test line of sight from vehicle to\n%s\n\t:%s" % (target, result))
 
 result = client.simTestLineOfSightBetweenPoints(home, target)
-print("test line of sight from home to\n%s\n\t:%s" %(target, result))
+print("test line of sight from home to\n%s\n\t:%s" % (target, result))
 
 result = client.simGetWorldExtents()
-print("world extents:\n%s\n\t-\n%s" %(result[0], result[1]))
+print("world extents:\n%s\n\t-\n%s" % (result[0], result[1]))
 
 client.reset()
 client.armDisarm(False)

@@ -9,33 +9,33 @@ include(${RPC_SOURCE_DIR}/cmake/check_warning_flag.cmake)
 #
 # Options
 #
-option(RPCLIB_BUILD_TESTS 
-  "Build unit RPCLIB_BUILD_TESTS." 
+option(RPCLIB_BUILD_TESTS
+  "Build unit RPCLIB_BUILD_TESTS."
   OFF)
-option(RPCLIB_GENERATE_COMPDB 
-  "Generate compilation database. Useful for YCM." 
+option(RPCLIB_GENERATE_COMPDB
+  "Generate compilation database. Useful for YCM."
   OFF)
-option(RPCLIB_BUILD_EXAMPLES 
-  "Build examples." 
+option(RPCLIB_BUILD_EXAMPLES
+  "Build examples."
   OFF)
-option(RPCLIB_ENABLE_LOGGING 
+option(RPCLIB_ENABLE_LOGGING
   "ALlow logging in the library for debug purposes."
   OFF)
-option(RPCLIB_ENABLE_COVERAGE 
-  "Generate coverage information" 
+option(RPCLIB_ENABLE_COVERAGE
+  "Generate coverage information"
   OFF)
-option(RPCLIB_MSVC_STATIC_RUNTIME 
-  "MSVC only: build with /MT instead of /MD" 
+option(RPCLIB_MSVC_STATIC_RUNTIME
+  "MSVC only: build with /MT instead of /MD"
   OFF)
 
 #
 # Other configuration values
 #
-set(RPCLIB_DEFAULT_PORT 8080 
+set(RPCLIB_DEFAULT_PORT 8080
   CACHE STRING "Default port used for running tests and examples")
-set(RPCLIB_DEFAULT_BUFFER_SIZE "1024 << 10" 
+set(RPCLIB_DEFAULT_BUFFER_SIZE "1024 << 10"
   CACHE STRING "Default buffer size")
-set(RPCLIB_CXX_STANDARD 14 CACHE STRING 
+set(RPCLIB_CXX_STANDARD 14 CACHE STRING
   "C++ version used to build rpclib (Currently: Only 11 and 14 supported)")
 
 if(RPCLIB_GENERATE_COMPDB)
@@ -45,7 +45,7 @@ if(RPCLIB_GENERATE_COMPDB)
     copy ${CMAKE_BINARY_DIR}/compile_commands.json ${CMAKE_BINARY_DIR}/../compile_commands.json)
 endif()
 
-if(NOT ${RPCLIB_CXX_STANDARD} EQUAL 14 AND 
+if(NOT ${RPCLIB_CXX_STANDARD} EQUAL 14 AND
    NOT ${RPCLIB_CXX_STANDARD} EQUAL 11)
   message(fatal_error "Unsupported C++ standard: ${RPCLIB_CXX_STANDARD}")
 endif()
@@ -91,7 +91,7 @@ set(DEP_SOURCES
 
 
 
-set( RPC_LIBRARY_SOURCE_FILES 
+set( RPC_LIBRARY_SOURCE_FILES
     ${RPC_SOURCE_DIR}/lib/rpc/dispatcher.cc
     ${RPC_SOURCE_DIR}/lib/rpc/server.cc
     ${RPC_SOURCE_DIR}/lib/rpc/client.cc
@@ -146,7 +146,7 @@ if (RPCLIB_EXTRA_BUILD_FLAGS)
   list(APPEND RPCLIB_BUILD_FLAGS ${RPCLIB_EXTRA_BUILD_FLAGS})
 endif()
 
-target_compile_definitions(${PROJECT_NAME} 
+target_compile_definitions(${PROJECT_NAME}
   PRIVATE
     "${RPCLIB_COMPILE_DEFINITIONS}"
     "${RPCLIB_ARCH_DEF}"
@@ -289,7 +289,7 @@ if (RPCLIB_EXTRA_BUILD_FLAGS)
   list(APPEND RPCLIB_BUILD_FLAGS ${RPCLIB_EXTRA_BUILD_FLAGS})
 endif()
 
-target_compile_definitions(${PROJECT_NAME} 
+target_compile_definitions(${PROJECT_NAME}
   PRIVATE
     "${RPCLIB_COMPILE_DEFINITIONS}"
     "${RPCLIB_ARCH_DEF}"

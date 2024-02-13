@@ -1,10 +1,10 @@
 # Busy Hard Drive
 
-It is not required, but we recommend running your Unreal Environment on a Solid State Drive (SSD). 
+It is not required, but we recommend running your Unreal Environment on a Solid State Drive (SSD).
 Between debugging, logging, and Unreal asset loading
 the hard drive can become your bottle neck.  It is normal that your hard drive will be slammed while Unreal is loading
 the environment, but if your hard drive performance looks like this while the Unreal game is running
-then you will probably not get a good flying experience.  
+then you will probably not get a good flying experience.
 
 ![Busy Hard Drive](images/busy_hard_drive.png)
 
@@ -15,7 +15,7 @@ loop inside the PX4 firmware that runs on a Pixhawk flight controller runs at 10
 
 ### Reducing I/O
 
-If you can't whip off to Fry's Electronics and pick up an overpriced super fast SSD this weekend, then the 
+If you can't whip off to Fry's Electronics and pick up an overpriced super fast SSD this weekend, then the
 following steps can be taken to reduce the hard drive I/O:
 
 1. First run the Unreal Environment using Cooked content outside of the UE Editor or any debugging environment,
@@ -25,8 +25,8 @@ and package the content to your fastest SSD drive.  You can do that using this m
 
 2. If you must use the UE editor (because you are actively modifying game assets), then at least
 don't run that in a debugger.  If you are using Visual Studio use start without debugging.
-3. If you must debug the app, and you are using Visual Studio debugger, stop then Visual Studio from 
-logging Intellitrace information.  
+3. If you must debug the app, and you are using Visual Studio debugger, stop then Visual Studio from
+logging Intellitrace information.
 Go to Tools/Options/Debugging/Intellitrace, and turn off the main checkbox.
 4. Turn off any [Unreal Analytics](https://docs.unrealengine.com/latest/INT/Gameplay/Analytics/index.html)
 that your environment may have enabled, especially any file logging.
@@ -47,7 +47,7 @@ but the drone still flies ok:
 
 ![Package Unreal Project](images/ue_hard_drive.png)
 
-This is what my fast  SSD looks like when the drone is flying in an Unreal Cooked app 
+This is what my fast  SSD looks like when the drone is flying in an Unreal Cooked app
 (no UE editor, no debugger).  Not surprisingly it is flying perfectly in this case:
 
 ![Package Unreal Project](images/cooked_ssd.png)

@@ -79,7 +79,7 @@ namespace LogViewer.Utilities
 
 
         /// <summary>
-        /// Interpolate the color that is at the given target offset 
+        /// Interpolate the color that is at the given target offset
         /// </summary>
         /// <param name="color1">The first color</param>
         /// <param name="offset1">The position of the first color as a number between 0 and 1</param>

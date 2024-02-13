@@ -41,7 +41,7 @@
               "Height": 480,
               "FOV_Degrees": 27,
               "DepthOfFieldFstop": 2.8,
-              "DepthOfFieldFocalDistance": 200.0, 
+              "DepthOfFieldFocalDistance": 200.0,
               "DepthOfFieldFocalRegion": 200.0,
               "TargetGamma": 1.5
             }
@@ -58,7 +58,7 @@
               "Height": 376,
               "FOV_Degrees": 90,
               "TargetGamma": 1.5
-            }, 
+            },
             {
               "PublishToRos": 1,
               "ImageType": 1,

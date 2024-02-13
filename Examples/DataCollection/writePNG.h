@@ -39,7 +39,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /*! \def SVPNG_LINKAGE
     \brief User customizable linkage for svpng() function.
     By default this macro is empty.
-    User may define this macro as static for static linkage, 
+    User may define this macro as static for static linkage,
     and/or inline in C99/C++, etc.
 */
 #ifndef SVPNG_LINKAGE

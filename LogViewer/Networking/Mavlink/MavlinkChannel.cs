@@ -423,7 +423,7 @@ namespace Microsoft.Networking.Mavlink
                                 if (msg.Payload != null)
                                 {
                                     found = msg.crc_calculate();
-                                    
+
                                 }
                                 if (found != crc && crc != 0)
                                 {
@@ -500,7 +500,7 @@ namespace Microsoft.Networking.Mavlink
     {
         /// <summary> Severity of status. Relies on the definitions within RFC-5424. See enum MAV_SEVERITY. </summary>
         public byte severity;
-        /// <summary> Status text message, without null termination character </summary>            
+        /// <summary> Status text message, without null termination character </summary>
         public string text;
 
         public mavlink_statustext_t2(MAVLink.mavlink_statustext_t s)

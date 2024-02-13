@@ -3,7 +3,7 @@ $airSimExecutable = "c:\AirSim\Blocks\blocks.exe"
 $airSimProcessName = "Blocks"
 
 # Ensure proper path
-$env:Path = 
+$env:Path =
     [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" +
     [System.Environment]::GetEnvironmentVariable("Path","User")
 

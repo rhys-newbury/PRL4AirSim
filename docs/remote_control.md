@@ -23,11 +23,11 @@ Currently default config on Linux is for using Xbox controller. This means other
 
 AirSim supports PX4 flight controller however it requires different setup. There are many remote control options that you can use with quadrotors. We have successfully used FrSky Taranis X9D Plus, FlySky FS-TH9X and Futaba 14SG with AirSim. Following are the high level steps to configure your RC:
 
-1. If you are going to use Hardware-in-Loop mode, you need transmitter for your specific brand of RC and bind it. You can find this information in RC's user guide. 
+1. If you are going to use Hardware-in-Loop mode, you need transmitter for your specific brand of RC and bind it. You can find this information in RC's user guide.
 2. For Hardware-in-Loop mode, you connect transmitter to Pixhawk. Usually you can find online doc or YouTube video tutorial on how to do that.
 3. [Calibrate your RC in QGroundControl](https://docs.qgroundcontrol.com/en/SetupView/Radio.html).
 
-See [PX4 RC configuration](https://docs.px4.io/en/getting_started/rc_transmitter_receiver.html) and Please see [this guide](https://docs.px4.io/master/en/getting_started/rc_transmitter_receiver.html#px4-compatible-receivers) for more information. 
+See [PX4 RC configuration](https://docs.px4.io/en/getting_started/rc_transmitter_receiver.html) and Please see [this guide](https://docs.px4.io/master/en/getting_started/rc_transmitter_receiver.html#px4-compatible-receivers) for more information.
 
 ### Using XBox 360 USB Gamepad
 

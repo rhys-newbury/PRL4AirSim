@@ -435,7 +435,7 @@ namespace MavLinkComGenerator
                     {
                         impl.Write(" << float_tostring(this->{0})", field.name);
                     }
-                    else 
+                    else
                     {
                         impl.Write(" << this->{0}", field.name);
                     }

@@ -12,10 +12,10 @@ about: Suggest an idea for this project
 ### Overview:
 <!-- Describe the feature you'd like. -->
 
-### Smaller Details: 
+### Smaller Details:
 <!-- These may include specific methods of implementation etc. -->
 
-### Nature of Request:  
+### Nature of Request:
 <!-- Remove all that do not apply to your request.  -->
 - Addition
 - Change

@@ -20,7 +20,7 @@ find_package(catkin REQUIRED COMPONENTS
 
 catkin_package(
   INCLUDE_DIRS
-  CATKIN_DEPENDS message_runtime roscpp std_msgs airsim_ros_pkgs  
+  CATKIN_DEPENDS message_runtime roscpp std_msgs airsim_ros_pkgs
 )
 
 include_directories(

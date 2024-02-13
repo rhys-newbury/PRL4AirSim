@@ -32,7 +32,7 @@ namespace Microsoft.Networking.Mavlink
             typeof(mavlink_sys_status_t), // 1
             typeof(mavlink_system_time_t), // 2
             null, // 3
-            typeof(mavlink_ping_t), // 4 
+            typeof(mavlink_ping_t), // 4
             typeof(mavlink_change_operator_control_t), // 5
             typeof(mavlink_change_operator_control_ack_t), // 6
             typeof(mavlink_auth_key_t), // 7
@@ -57,7 +57,7 @@ namespace Microsoft.Networking.Mavlink
             typeof(mavlink_scaled_imu_t),                                        // 26
             typeof(mavlink_raw_imu_t),                                           // 27
             typeof(mavlink_raw_pressure_t),                                      // 28
-            typeof(mavlink_scaled_pressure_t),                                   // 29 
+            typeof(mavlink_scaled_pressure_t),                                   // 29
             typeof(mavlink_attitude_t),                                          // 30
             typeof(mavlink_attitude_quaternion_t),                               // 31
             typeof(mavlink_local_position_ned_t),                                // 32
@@ -67,7 +67,7 @@ namespace Microsoft.Networking.Mavlink
             typeof(mavlink_servo_output_raw_t),                                  // 36
             typeof(mavlink_mission_request_partial_list_t),                      // 37
             typeof(mavlink_mission_write_partial_list_t),                        // 38
-            typeof(mavlink_mission_item_t),                                      // 39 
+            typeof(mavlink_mission_item_t),                                      // 39
             typeof(mavlink_mission_request_t),                                   // 40
             typeof(mavlink_mission_set_current_t),                               // 41
             typeof(mavlink_mission_current_t),                                   // 42
@@ -6110,7 +6110,7 @@ namespace Microsoft.Networking.Mavlink
 
         };
 
-        // custom message from the simulator 
+        // custom message from the simulator
         [StructLayout(LayoutKind.Sequential)]
         public struct mavlink_telemetry
         {

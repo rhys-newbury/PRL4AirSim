@@ -47,7 +47,7 @@ float4 Output(float depth01, float3 normal)
 	}
 	else if (_OutputMode == 2) // DepthCompressed
 	{
-		float linearZFromNear = Linear01FromEyeToLinear01FromNear(depth01); 
+		float linearZFromNear = Linear01FromEyeToLinear01FromNear(depth01);
 		float k = 0.25; // compression factor
 		return pow(linearZFromNear, k);
 	}
@@ -155,7 +155,7 @@ v2f vert( appdata_full v ) {
 	UNITY_SETUP_INSTANCE_ID(v);
 	UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
 	TreeVertBark(v);
-	
+
 	o.pos = UnityObjectToClipPos(v.vertex);
 	o.uv = v.texcoord.xy;
 	o.nz.xyz = COMPUTE_VIEW_NORMAL;
@@ -189,7 +189,7 @@ v2f vert( appdata_full v ) {
 	UNITY_SETUP_INSTANCE_ID(v);
 	UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
 	TreeVertLeaf(v);
-	
+
 	o.pos = UnityObjectToClipPos(v.vertex);
 	o.uv = v.texcoord.xy;
 	o.nz.xyz = COMPUTE_VIEW_NORMAL;
@@ -242,7 +242,7 @@ fixed4 frag(v2f i) : SV_Target {
 }
 ENDCG
 	}
-} 
+}
 
 SubShader {
 	Tags { "RenderType"="TreeTransparentCutout" "DisableBatching"="True" }
@@ -372,7 +372,7 @@ ENDCG
 SubShader {
 	Tags { "RenderType"="GrassBillboard" }
 	Pass {
-		Cull Off		
+		Cull Off
 CGPROGRAM
 #pragma vertex vert
 #pragma fragment frag

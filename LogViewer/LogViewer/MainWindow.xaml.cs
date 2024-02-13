@@ -150,7 +150,7 @@ namespace LogViewer
                     {
                         // Only do this if drone is not sending MAVLINK_MSG_ID.ATTITUDE...
                         if (Environment.TickCount - lastAttitudeMessage > 1000)
-                        {                            
+                        {
                             var payload = (MAVLink.mavlink_attitude_quaternion_t)e.TypedPayload;
                             var q = new System.Windows.Media.Media3D.Quaternion(payload.q1, payload.q2, payload.q3, payload.q4);
                             UiDispatcher.RunOnUIThread(() =>
@@ -518,7 +518,7 @@ namespace LogViewer
         {
             UiDispatcher.RunOnUIThread(() =>
             {
-                // add flights 
+                // add flights
                 Flight entireLog = new Flight()
                 {
                     Name = "Log " + logs.Count,
@@ -543,7 +543,7 @@ namespace LogViewer
                 {
                     ShowMap();
                 }
-                
+
             });
 
         }
@@ -609,7 +609,7 @@ namespace LogViewer
             ShowStatus("Done Loading " + file);
             UpdateButtons();
         }
-        
+
         private async Task LoadCsvFile(string file)
         {
             try
@@ -662,7 +662,7 @@ namespace LogViewer
                 {
                     CategoryList.ItemsSource = null;
                 }
-                else 
+                else
                 {
                     List<LogItemSchema> list = schema.CopyChildren();
                     list.Sort((a, b) => { return string.Compare(a.Name, b.Name, StringComparison.OrdinalIgnoreCase); });
@@ -946,7 +946,7 @@ namespace LogViewer
                 ShowMapButton.Visibility = Visibility.Visible;
             });
         }
-        
+
         HashSet<ListView> childLists = new HashSet<ListView>();
 
         private void OnChildListItemSelected(object sender, SelectionChangedEventArgs e)
@@ -990,7 +990,7 @@ namespace LogViewer
                         break;
                     }
                 }
-            }            
+            }
         }
 
         Thickness defaultChartMargin = new Thickness(0, 10, 0, 10);
@@ -1040,7 +1040,7 @@ namespace LogViewer
             if (data != null && mapData != null && myMap.Visibility == Visibility.Visible)
             {
                 double time = data.X;
-                double dist = double.MaxValue; 
+                double dist = double.MaxValue;
                 int closest = 0;
                 int i = 0;
                 LogEntryGPS gps = null;
@@ -1104,7 +1104,7 @@ namespace LogViewer
                     if (data.Any())
                     {
                         chart = AddChart(schema, data);
-                    }                                      
+                    }
                     ShowStatus(string.Format("Found {0} data values", data.Count()));
                 }
 
@@ -1216,7 +1216,7 @@ namespace LogViewer
                 myMap.Children.Remove(annotationLayer);
             }
             annotationLayer = new MapLayer();
-            
+
             SolidColorBrush annotationBrush = new SolidColorBrush(Color.FromArgb(0x80, 0xff, 0xff, 0xB0));
 
             foreach (var dv in unique)
@@ -1265,7 +1265,7 @@ namespace LogViewer
                     }
                     annotationLayer.AddChild(new TextBlock(new Run(label) { Background = annotationBrush }), pos, PositionOrigin.BottomLeft);
                 }
-                
+
             }
             myMap.Children.Add(annotationLayer);
 
@@ -1299,7 +1299,7 @@ namespace LogViewer
             SimpleLineChart chart = (SimpleLineChart)sender;
             AddChart((LogItemSchema)chart.Tag, e);
         }
-        
+
         private void OnClearAllAdornments(object sender, EventArgs e)
         {
             foreach (var chart in ChartStack.FindCharts())
@@ -1307,7 +1307,7 @@ namespace LogViewer
                 chart.ClearAdornments();
             }
         }
-        
+
         private void InitializeChartData(LogItemSchema schema, SimpleLineChart chart, IEnumerable<DataValue> values)
         {
             chart.SetData(new Model.DataSeries()
@@ -1475,7 +1475,7 @@ namespace LogViewer
                 }
             });
         }
-        
+
         private void OnFlightViewKeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Delete)
@@ -1620,7 +1620,7 @@ namespace LogViewer
         {
             pauseRecording = true;
             foreach (var chart in liveScrolling)
-            {                
+            {
                 chart.LiveScrolling = false;
             }
         }
@@ -1819,4 +1819,3 @@ namespace LogViewer
         }
     }
 }
-

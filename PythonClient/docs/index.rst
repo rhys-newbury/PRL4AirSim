@@ -8,7 +8,7 @@ airsim
 This page documents `airsim`_, the python package to be used for `Microsoft AirSim`_.
 
 .. _`airsim`: https://pypi.org/project/airsim/
-.. _`Microsoft AirSim`: https://github.com/microsoft/AirSim 
+.. _`Microsoft AirSim`: https://github.com/microsoft/AirSim
 
 .. toctree::
 	:maxdepth: 3
@@ -34,9 +34,9 @@ This page documents `airsim`_, the python package to be used for `Microsoft AirS
 .. automodule:: airsim.types
     :members:
     :undoc-members:
-   	:show-inheritance: 
+   	:show-inheritance:
 
 .. automodule:: airsim.utils
     :members:
-    :undoc-members:	
-   	:show-inheritance: 
+    :undoc-members:
+   	:show-inheritance:

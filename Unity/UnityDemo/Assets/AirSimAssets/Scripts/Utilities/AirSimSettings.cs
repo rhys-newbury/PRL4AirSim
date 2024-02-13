@@ -216,7 +216,7 @@ namespace AirSimUnity {
             }
             return content;
         }
-        
+
         private void SetDefaults() {
             Recording.RecordInterval = 0.05f;
             Recording.RecordOnMove = false;

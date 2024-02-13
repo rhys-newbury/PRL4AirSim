@@ -1,9 +1,9 @@
-This is a tutorial for generating simulated thermal infrared (IR) images using AirSim and the AirSim Africa environment. 
+This is a tutorial for generating simulated thermal infrared (IR) images using AirSim and the AirSim Africa environment.
 
-Pre-compiled Africa Environment can be downloaded from the Releases tab of this Github repo: 
+Pre-compiled Africa Environment can be downloaded from the Releases tab of this Github repo:
 [Windows Pre-compiled binary](https://github.com/Microsoft/AirSim/releases/tag/v1.2.1)
 
-To generate your own data, you may use two python files: [create_ir_segmentation_map.py](https://github.com/Microsoft/AirSim/tree/master/PythonClient//computer_vision/create_ir_segmentation_map.py) and 
+To generate your own data, you may use two python files: [create_ir_segmentation_map.py](https://github.com/Microsoft/AirSim/tree/master/PythonClient//computer_vision/create_ir_segmentation_map.py) and
 [capture_ir_segmentation.py](https://github.com/Microsoft/AirSim/tree/master/PythonClient//computer_vision/capture_ir_segmentation.py).
 
 [create_ir_segmentation_map.py](https://github.com/Microsoft/AirSim/tree/master/PythonClient//computer_vision/create_ir_segmentation_map.py) uses temperature, emissivity, and camera response information to estimate the thermal digital count that could be expected for the objects in the environment, and then reassigns the segmentation IDs in AirSim to match these digital counts. It should be run before starting to capture thermal IR data. Otherwise, digital counts in the IR images will be incorrect. The camera response, temperature, and emissivity data are all included for the Africa environment.

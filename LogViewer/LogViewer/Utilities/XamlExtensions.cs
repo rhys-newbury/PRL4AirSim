@@ -61,14 +61,14 @@ namespace LogViewer.Utilities
                     }
                 }
             }
-            
+
             if (!content)
             {
                 //use the visual tree per default
                 int count = VisualTreeHelper.GetChildrenCount(d);
                 for (int i = 0; i < count; i++)
                 {
-                    var child = VisualTreeHelper.GetChild(d, i); 
+                    var child = VisualTreeHelper.GetChild(d, i);
                     CollectDescendantsOfType(child, result);
                 }
             }
@@ -87,7 +87,7 @@ namespace LogViewer.Utilities
             // Load it into memory first so we stop the BitmapDecoder from locking the file.
             MemoryStream ms = new MemoryStream();
             byte[] buffer = new byte[16000];
-            
+
             int len = stream.Read(buffer, 0, buffer.Length);
             while (len > 0)
             {

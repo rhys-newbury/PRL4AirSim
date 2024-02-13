@@ -23,6 +23,6 @@ namespace LogViewer
             }
             return this.settings;
         }
-        
+
     }
 }

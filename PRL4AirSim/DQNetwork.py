@@ -4,6 +4,7 @@ import torch
 import torch.nn.functional as functional
 import numpy as np
 
+
 class DQNetwork(nn.Module):
     def __init__(self, learningRate: float, num_actions: int, image_input_dims: tuple):
         super(DQNetwork, self).__init__()
@@ -13,7 +14,9 @@ class DQNetwork(nn.Module):
 
         self.maxpooling = nn.MaxPool2d((2, 2), stride=2)
 
-        self.image_conv1 = nn.Conv2d(image_input_dims[0], 16, kernel_size=(6, 6), stride=(2, 2))
+        self.image_conv1 = nn.Conv2d(
+            image_input_dims[0], 16, kernel_size=(6, 6), stride=(2, 2)
+        )
         self.image_conv2 = nn.Conv2d(16, 32, kernel_size=(3, 3), stride=(1, 1))
 
         self.vel_fc1 = nn.Linear(3, 16)
@@ -24,7 +27,7 @@ class DQNetwork(nn.Module):
 
         self.optimizer = optim.RMSprop(self.parameters(), lr=learningRate)
         self.loss = nn.MSELoss()
-        self.device = torch.device('cuda:0')
+        self.device = torch.device("cuda:0")
         self.to(self.device)
 
     def calculate_conv_output_dims(self):
@@ -38,7 +41,7 @@ class DQNetwork(nn.Module):
 
         return int(np.prod(x.size()))
 
-    def forward(self, image : torch.tensor, velocity : torch.tensor):
+    def forward(self, image: torch.tensor, velocity: torch.tensor):
         image = self.maxpooling(functional.relu(self.image_conv1(image)))
         image = self.maxpooling(functional.relu(self.image_conv2(image)))
         image_flattened = image.view(image.size()[0], -1)
@@ -55,14 +58,22 @@ class DQNetwork(nn.Module):
         print("Testing network")
         image = torch.zeros(1, *self.image_input_dims).float().to(self.device)
         velocity = torch.zeros((1, 3)).float().to(self.device)
-        print("Input shapes: [image]: {} [velocity]: {}".format(image.size(), velocity.size()))
+        print(
+            "Input shapes: [image]: {} [velocity]: {}".format(
+                image.size(), velocity.size()
+            )
+        )
         output = self.forward(image, velocity)
         print("Output: {}".format(output))
+
 
 if __name__ == "__main__":
     print("test")
     model = DQNetwork(learningRate=0.001, num_actions=2, image_input_dims=(2, 64, 64))
     print("total parameters: ", sum(p.numel() for p in model.parameters()))
-    print("total trainable parameters: ", sum(p.numel() for p in model.parameters() if p.requires_grad))
+    print(
+        "total trainable parameters: ",
+        sum(p.numel() for p in model.parameters() if p.requires_grad),
+    )
     print("total data points: ", (10 * 32 * 5000) / 30)
     model.test()

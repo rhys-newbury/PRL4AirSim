@@ -1,11 +1,11 @@
 /*
-* 
+*
 * An XmlReader implementation for loading comma delimited files (.csv files)
 *
 * Copyright (c) 2001-2005 Microsoft Corporation. All rights reserved.
 *
 * Chris Lovett
-* 
+*
 */
 
 using System;
@@ -107,7 +107,7 @@ namespace Microsoft.Xml {
             get { return _baseUri == null ? "" : _baseUri.AbsoluteUri; }
             set { _baseUri = new Uri(value); }
         }
-        
+
         /// <summary>
         /// Specifies the encoding to use when loading the .csv file.
         /// </summary>
@@ -125,17 +125,17 @@ namespace Microsoft.Xml {
         /// </summary>
         public string Href {
             get { return _href == null ? "" : _href.AbsoluteUri; }
-            set { 
+            set {
                 if (_baseUri != null) {
-                    _href = new Uri(_baseUri, value); 
+                    _href = new Uri(_baseUri, value);
                 } else {
                     try {
-                        _href = new Uri(value); 
-                    } 
+                        _href = new Uri(value);
+                    }
                     catch (Exception) {
                         string file = Path.GetFullPath(value);
                         _href = new Uri(file);
-                    } 
+                    }
                     _baseUri = _href;
                 }
                 _csvReader = null;
@@ -145,7 +145,7 @@ namespace Microsoft.Xml {
 
         /// <summary>
         /// Specifies the proxy server.  This is only needed for internet HTTP requests
-        /// where the caller is behind a proxy server internet gateway. 
+        /// where the caller is behind a proxy server internet gateway.
         /// </summary>
         public string Proxy {
             get { return _proxy; }
@@ -203,7 +203,7 @@ namespace Microsoft.Xml {
         /// </summary>
         public string[] ColumnNames {
             get { return _names; }
-            set { 
+            set {
                 // atomize the names.
                 ArrayList copy = new ArrayList();
                 for (int i = 0; i < value.Length; i++) {
@@ -214,7 +214,7 @@ namespace Microsoft.Xml {
         }
 
         /// <summary>
-        /// Gets or sets the column delimiter.  Default is '\0' which means 
+        /// Gets or sets the column delimiter.  Default is '\0' which means
         /// the reader will auto detect the delimiter.
         /// </summary>
         public char Delimiter {
@@ -234,10 +234,10 @@ namespace Microsoft.Xml {
             }
         }
 
-        public override XmlNodeType NodeType { 
+        public override XmlNodeType NodeType {
             get {
                 switch (_state) {
-                    case State.Initial: 
+                    case State.Initial:
                     case State.Eof:
                         return XmlNodeType.None;
                     case State.Root:
@@ -251,7 +251,7 @@ namespace Microsoft.Xml {
                         return XmlNodeType.Text;
                     default:
                         return XmlNodeType.EndElement;
-                }       
+                }
             }
         }
 
@@ -261,7 +261,7 @@ namespace Microsoft.Xml {
             }
         }
 
-        public override string LocalName { 
+        public override string LocalName {
             get {
                 switch (_state) {
                     case State.Attr:
@@ -269,7 +269,7 @@ namespace Microsoft.Xml {
                     case State.EndField:
                         if (_names == null || _attr >= _names.Length) {
                             return this._nt.Add("a"+_attr);
-                        } 
+                        }
                         return XmlConvert.EncodeLocalName(_names[_attr]);
                     case State.Root:
                     case State.EndRoot:
@@ -282,19 +282,19 @@ namespace Microsoft.Xml {
             }
         }
 
-        public override string NamespaceURI { 
+        public override string NamespaceURI {
             get {
                 return String.Empty;
             }
         }
 
-        public override string Prefix { 
+        public override string Prefix {
             get {
                 return String.Empty;
             }
         }
 
-        public override bool HasValue { 
+        public override bool HasValue {
             get {
                 if (_state == State.Attr || _state == State.AttrValue || _state == State.FieldValue) {
                     return Value != String.Empty;
@@ -303,7 +303,7 @@ namespace Microsoft.Xml {
             }
         }
 
-        public override string Value { 
+        public override string Value {
             get {
                 if (_state == State.Attr || _state == State.AttrValue || _state == State.FieldValue) {
                     return _csvReader[_attr];
@@ -312,7 +312,7 @@ namespace Microsoft.Xml {
             }
         }
 
-        public override int Depth { 
+        public override int Depth {
             get {
                 switch (_state) {
                     case State.Row:
@@ -325,52 +325,52 @@ namespace Microsoft.Xml {
                     case State.AttrValue:
                     case State.FieldValue:
                         return 3;
-                }       
+                }
                 return 0;
             }
         }
 
-        public override string BaseURI { 
+        public override string BaseURI {
             get {
                 return _baseUri.AbsolutePath;
             }
         }
 
-        public override bool IsEmptyElement { 
+        public override bool IsEmptyElement {
             get {
-                if (_state == State.Row && _asAttrs) 
+                if (_state == State.Row && _asAttrs)
                     return true;
 
-                if (_state == State.Field && _csvReader[_attr] == String.Empty) 
+                if (_state == State.Field && _csvReader[_attr] == String.Empty)
                     return true;
 
                 return false;
             }
         }
-        public override bool IsDefault { 
+        public override bool IsDefault {
             get {
                 return false;
             }
         }
-        public override char QuoteChar { 
+        public override char QuoteChar {
             get {
                 return _csvReader.QuoteChar;
             }
         }
 
-        public override XmlSpace XmlSpace { 
+        public override XmlSpace XmlSpace {
             get {
                 return XmlSpace.Default;
             }
         }
 
-        public override string XmlLang { 
+        public override string XmlLang {
             get {
                 return String.Empty;
             }
         }
 
-        public override int AttributeCount { 
+        public override int AttributeCount {
             get {
                 if (! _asAttrs) return 0;
 
@@ -386,7 +386,7 @@ namespace Microsoft.Xml {
 
             if (_state == State.Row || _state == State.Attr || _state == State.AttrValue) {
                 int i = GetOrdinal(name);
-                if (i >= 0) 
+                if (i >= 0)
                     return GetAttribute(i);
             }
             return null;
@@ -418,19 +418,19 @@ namespace Microsoft.Xml {
             return null;
         }
 
-        public override string this [ int i ] { 
+        public override string this [ int i ] {
             get {
                 return GetAttribute(i);
             }
         }
 
-        public override string this [ string name ] { 
+        public override string this [ string name ] {
             get {
                 return GetAttribute(name);
             }
         }
 
-        public override string this [ string name,string namespaceURI ] { 
+        public override string this [ string name,string namespaceURI ] {
             get {
                 return GetAttribute(name, namespaceURI);
             }
@@ -456,7 +456,7 @@ namespace Microsoft.Xml {
                 if (_state == State.Row || _state == State.Attr || _state == State.AttrValue) {
                     _state = State.Attr;
                     _attr = i;
-                }     
+                }
             }
         }
 
@@ -489,7 +489,7 @@ namespace Microsoft.Xml {
             else if (_state == State.Attr || _state == State.AttrValue) {
                 _state = State.Row;
                 return true;
-            }                               
+            }
             return false;
         }
 
@@ -507,13 +507,13 @@ namespace Microsoft.Xml {
                 case State.Eof:
                     return false;
                 case State.Root:
-                case State.EndRow:          
+                case State.EndRow:
                     if (_csvReader.Read()) {
                         _state = State.Row;
                         return true;
                     }
                     _state = State.EndRoot;
-                    return true;        
+                    return true;
                 case State.EndRoot:
                     _state = State.Eof;
                     return false;
@@ -521,7 +521,7 @@ namespace Microsoft.Xml {
                     if (_asAttrs) {
                         _attr = 0;
                         goto case State.EndRow;
-                    } 
+                    }
                     else {
                         _state = State.Field;
                         _attr = 0;
@@ -530,7 +530,7 @@ namespace Microsoft.Xml {
                 case State.Field:
                     if (!IsEmptyElement) {
                         _state = State.FieldValue;
-                    } 
+                    }
                     else {
                         goto case State.EndField;
                     }
@@ -555,13 +555,13 @@ namespace Microsoft.Xml {
             return false;
         }
 
-        public override bool EOF { 
+        public override bool EOF {
             get {
                 return _state == State.Eof;
             }
         }
 
-        public override ReadState ReadState { 
+        public override ReadState ReadState {
             get {
                 if (_state == State.Initial) return ReadState.Initial;
                 else if (_state == State.Eof) return ReadState.EndOfFile;
@@ -604,13 +604,13 @@ namespace Microsoft.Xml {
             return sw.ToString();
         }
 
-        public override XmlNameTable NameTable { 
+        public override XmlNameTable NameTable {
             get {
                 return _nt;
             }
         }
 
-        public override string LookupNamespace(string prefix) {     
+        public override string LookupNamespace(string prefix) {
             return null;
         }
 
@@ -627,7 +627,7 @@ namespace Microsoft.Xml {
                 return false;
             }
             throw new Exception("Not on an attribute.");
-        } 
+        }
 
     }
 
@@ -651,12 +651,12 @@ namespace Microsoft.Xml {
             _r = new StreamReader(stm, encoding, true);
             _buffer = new char[bufsize];
             _values = new ArrayList();
-        }     
+        }
         public CsvReader(TextReader stm, int bufsize) {  // the location of the .csv file
             _r = stm;
             _buffer = new char[bufsize];
             _values = new ArrayList();
-        }     
+        }
 
         public TextReader Reader {
             get { return _r; }
@@ -668,14 +668,14 @@ namespace Microsoft.Xml {
             _fields = 0;
             char ch = ReadChar();
             if (ch == 0) return false;
-            while (ch != 0 && ch == '\r' || ch == '\n' || ch == ' ') 
+            while (ch != 0 && ch == '\r' || ch == '\n' || ch == ' ')
                 ch = ReadChar();
             if (ch == 0) return false;
 
             while (ch != 0 && ch != '\r' && ch != '\n') {
                 StringBuilder sb = AddField();
                 if (ch == '\'' || ch == '"') {
-                    _quoteChar= ch;         
+                    _quoteChar= ch;
                     char c = ReadChar();
                     bool done = false;
                     while (!done && c != 0) {
@@ -708,9 +708,9 @@ namespace Microsoft.Xml {
                             }
                         }
                     }
-                    ch = c;         
-                } 
-                else {        
+                    ch = c;
+                }
+                else {
                     // skip whitespace
                     while (ch == ' ')
                     {
@@ -723,7 +723,7 @@ namespace Microsoft.Xml {
                         sb.Append(ch);
                         ch = ReadChar();
                     }
-                } 
+                }
                 if (ch == _colDelim || (_colDelim == '\0' && (ch == ',' || ch == ';' || ch == '\t' || ch == '|'))){
                     _colDelim = ch;
                     ch = ReadChar();
@@ -762,11 +762,11 @@ namespace Microsoft.Xml {
             return sb;
         }
 
-        
+
 
         public void Close() {
-            _r.Dispose();       
+            _r.Dispose();
         }
     }
-  
+
 }

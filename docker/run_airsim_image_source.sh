@@ -36,13 +36,13 @@ SDL_VIDEODRIVER_VALUE='';
 while [ -n "$1" ]; do
     case "$1" in
     --)
-        shift 
+        shift
         break
-        ;; 
+        ;;
     esac
     shift
 done
- 
+
 for param in $@; do
     case "$param" in
     headless) SDL_VIDEODRIVER_VALUE='offscreen' ;;

@@ -29,22 +29,22 @@ echo Using OutPath = %OutPath%
 
 for %%f in (*.uproject) do (
 		echo Packaging: %%f
-		
+
 		"%ToolPath%\Build" "%%~nfEditor" Win64 Development -WarningsAsErrors "%cd%\%%f"
 		if ERRORLEVEL 1 goto :failed
-		
-		REM "%ToolPath%\RunUAT" -ScriptsForProject="%cd%\%%f" BuildCookRun -installed -nop4 -project="%cd%\%%f" -cook -stage -archive -archivedirectory="%OutPath%" -package -clientconfig=Development -ue4exe=UE4Editor-Cmd.exe -compressed -pak -prereqs -nodebuginfo -targetplatform=Win64 -build -utf8output -nocompile -nocompileeditor 
-		
+
+		REM "%ToolPath%\RunUAT" -ScriptsForProject="%cd%\%%f" BuildCookRun -installed -nop4 -project="%cd%\%%f" -cook -stage -archive -archivedirectory="%OutPath%" -package -clientconfig=Development -ue4exe=UE4Editor-Cmd.exe -compressed -pak -prereqs -nodebuginfo -targetplatform=Win64 -build -utf8output -nocompile -nocompileeditor
+
 		REM "%ToolPath%\RunUAT" BuildCookRun -project="%cd%\%%f" -noP4 -platform=Win64 -clientconfig=Development -serverconfig=Development -cook -rocket -allmaps -build -stage -NoCompile -nocompileeditor -pak -archive -archivedirectory="%OutPath%"
-		
+
 		rmdir /s /q "%OutPath%\%%~nf"
-		
+
 		"%ToolPath%\RunUAT" BuildCookRun -project="%cd%\%%f" -noP4 -platform=Win64 -clientconfig=Development -cook -build -stage -pak -archive -archivedirectory="%OutPath%"  -utf8output -compressed -prereqs
 		if ERRORLEVEL 1 goto :failed
-		
+
 		move "%OutPath%\WindowsNoEditor" "%OutPath%\%%~nf"
 		if ERRORLEVEL 1 goto :failed
-		
+
 		@echo off
 		echo start %%~nf -windowed> "%OutPath%\%%~nf\run.bat"
 		if ERRORLEVEL 1 goto :failed
@@ -59,6 +59,3 @@ exit /b 1
 
 :done
 if "%1"=="" pause
-
-	
-

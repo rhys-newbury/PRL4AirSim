@@ -12,7 +12,7 @@ We recommend GPUs such as NVidia 1080 or NVidia Titan series with powerful deskt
 ## Updating and Changing AirSim Code
 
 ### Overview
-AirSim is designed as plugin. This means it can't run by itself, you need to put it in an Unreal project (we call it "environment"). So building and testing AirSim has two steps: (1) build the plugin (2) deploy plugin in Unreal project and run the project. 
+AirSim is designed as plugin. This means it can't run by itself, you need to put it in an Unreal project (we call it "environment"). So building and testing AirSim has two steps: (1) build the plugin (2) deploy plugin in Unreal project and run the project.
 
 The first step is accomplished by build.cmd available in AirSim root. This command will update everything you need for the plugin in the `Unreal\Plugins` folder. So to deploy the plugin, you just need to copy `Unreal\Plugins` folder in to your Unreal project folder. Next you should remove all  intermediate files in your Unreal project and then regenerate .sln file for your Unreal project. To do this, we have two handy .bat files in `Unreal\Environments\Blocks` folder: `clean.bat` and `GenerateProjectFiles.bat`. So just run these bat files in sequence from root of your Unreal project. Now you are ready to open new .sln in Visual Studio and press F5 to run it.
 
@@ -23,21 +23,21 @@ Below are the steps we use to make changes in AirSim and test them out. The best
 REM //Use x64 Native Tools Command Prompt for VS 2019
 REM //Navigate to AirSim repo folder
 
-git pull                          
-build.cmd                        
-cd Unreal\Environments\Blocks         
+git pull
+build.cmd
+cd Unreal\Environments\Blocks
 update_from_git.bat
 start Blocks.sln
 ```
 
-Above commands first builds the AirSim plugin and then deploys it to Blocks project using handy `update_from_git.bat`. Now you can work inside Visual Studio solution, make changes to the code and just run F5 to build, run and test your changes. The debugging, break points etc should work as usual. 
+Above commands first builds the AirSim plugin and then deploys it to Blocks project using handy `update_from_git.bat`. Now you can work inside Visual Studio solution, make changes to the code and just run F5 to build, run and test your changes. The debugging, break points etc should work as usual.
 
 After you are done with you code changes, you might want to push your changes back to AirSim repo or your own fork or you may deploy the new plugin to your custom Unreal project. To do this, go back to command prompt and first update the AirSim repo folder:
 
 
 ```
 REM //Use x64 Native Tools Command Prompt for VS 2019
-REM //run this from Unreal\Environments\Blocks 
+REM //run this from Unreal\Environments\Blocks
 
 update_to_git.bat
 build.cmd
@@ -67,6 +67,3 @@ You are in luck! We have `build_all_ue_projects.bat` which exactly does that. Do
 
 #### How do I contribute back to AirSim?
 Before making any changes make sure you have created your feature branch. After you test your code changes in Blocks environment, follow the [usual steps](https://akrabat.com/the-beginners-guide-to-contributing-to-a-github-project/) to make contributions just like any other GitHub projects. Please use rebase and squash merge, for more information see [An introduction to Git merge and rebase: what they are, and how to use them](https://www.freecodecamp.org/news/an-introduction-to-git-merge-and-rebase-what-they-are-and-how-to-use-them-131b863785f/).
-
-
-

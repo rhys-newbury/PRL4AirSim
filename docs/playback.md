@@ -6,7 +6,7 @@ The [recording.mavlink](logs/recording.mavlink) is an example of a log file capt
 command line:
 
 ```
-MavLinkTest -serial:/dev/ttyACM0,115200 -logdir:. 
+MavLinkTest -serial:/dev/ttyACM0,115200 -logdir:.
 ```
 
 Then the log file contains the commands performed, which included several "orbit" commands, the resulting GPS map of the flight
@@ -54,4 +54,3 @@ param COM_DISARM_LAND 60
 param NAV_RCL_ACT 0
 param NAV_DLL_ACT 0
 ```
-

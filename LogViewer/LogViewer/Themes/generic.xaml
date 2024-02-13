@@ -1,5 +1,5 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"                     
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:LogViewer.Controls"
                     xmlns:clr="clr-namespace:System;assembly=mscorlib">
 
@@ -37,7 +37,7 @@
     <SolidColorBrush x:Key="FocusVisualBlackStrokeThemeBrush" Color="Black"/>
     <SolidColorBrush x:Key="BackButtonPointerOverBackgroundThemeBrush" Color="{StaticResource ControlMouseOverColor}"/>
     <SolidColorBrush x:Key="BackButtonPointerOverForegroundThemeBrush" Color="white"/>
-    
+
     <!--
         BackButtonStyle is used to style a Button for use in the title area of a page.  Margins appropriate for
         the conventional page layout are included as part of the style.
@@ -65,7 +65,7 @@
                         </Grid>
                         <Rectangle
                             x:Name="FocusVisualWhite"
-                            IsHitTestVisible="False" 
+                            IsHitTestVisible="False"
                             Stroke="{StaticResource FocusVisualWhiteStrokeThemeBrush}"
                             StrokeEndLineCap="Square"
                             StrokeDashArray="1,1"
@@ -247,7 +247,7 @@
                     <Border CornerRadius="2"
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="1" />  
+                        BorderThickness="1" />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -257,7 +257,7 @@
                  TargetType="{x:Type ScrollBar}">
         <Grid>
             <Track x:Name="PART_Track"
-               IsDirectionReversed="true">  
+               IsDirectionReversed="true">
                 <Track.Thumb>
                     <Thumb Style="{StaticResource ScrollBarThumb}" Margin="1,0,1,0" Background="#80F0F0F0">
                         <Thumb.BorderBrush>
@@ -282,7 +282,7 @@
                  TargetType="{x:Type ScrollBar}">
         <Grid>
             <Track x:Name="PART_Track"
-               IsDirectionReversed="False"> 
+               IsDirectionReversed="False">
                 <Track.Thumb>
                     <Thumb Style="{StaticResource ScrollBarThumb}" Margin="0,1,0,1" Background="#80F0F0F0">
 
@@ -341,7 +341,7 @@
                                         <DoubleAnimation To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="PART_VerticalScrollBar" Duration="00:00:00.5"/>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_VerticalScrollBar" Storyboard.TargetProperty="Visibility">
                                             <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
-                                        </ObjectAnimationUsingKeyFrames>                                                                        
+                                        </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
                                 <VisualState x:Name="NotScrolling"/>
@@ -349,37 +349,37 @@
                         </VisualStateManager.VisualStateGroups>
                         <Grid Margin="{TemplateBinding Padding}">
 
-                            <ScrollContentPresenter x:Name="PART_ScrollContentPresenter" 
+                            <ScrollContentPresenter x:Name="PART_ScrollContentPresenter"
                                                   Cursor="{TemplateBinding Cursor}"
                                                   Margin="{TemplateBinding Padding}"
-                                                  ContentTemplate="{TemplateBinding ContentTemplate}" 
+                                                  ContentTemplate="{TemplateBinding ContentTemplate}"
                                                   Content="{TemplateBinding Content}"
                                                   CanContentScroll="{TemplateBinding CanContentScroll}"/>
 
-                            
+
                             <ScrollBar x:Name="PART_VerticalScrollBar" HorizontalAlignment="Right" VerticalAlignment="Stretch"
                                        Height="Auto"
-                                       IsHitTestVisible="True" IsTabStop="False" 
-                                       Orientation="Vertical" 
+                                       IsHitTestVisible="True" IsTabStop="False"
+                                       Orientation="Vertical"
                                        Visibility="Collapsed"
-                                       Maximum="{TemplateBinding ScrollableHeight }" 
-                                       Minimum="0" 
-                                       Opacity="0" 
-                                       Value="{TemplateBinding VerticalOffset}" 
-                                       ViewportSize="{TemplateBinding ViewportHeight}" 
+                                       Maximum="{TemplateBinding ScrollableHeight }"
+                                       Minimum="0"
+                                       Opacity="0"
+                                       Value="{TemplateBinding VerticalOffset}"
+                                       ViewportSize="{TemplateBinding ViewportHeight}"
                                        Style="{StaticResource TinyScrollBar}"
                                        />
                             <ScrollBar x:Name="PART_HorizontalScrollBar" VerticalAlignment="Bottom" HorizontalAlignment="Stretch"
-                                       Width="Auto" 
-                                       Orientation="Horizontal" 
-                                       IsHitTestVisible="True" IsTabStop="False" 
-                                       Maximum="{TemplateBinding ScrollableWidth}" 
+                                       Width="Auto"
+                                       Orientation="Horizontal"
+                                       IsHitTestVisible="True" IsTabStop="False"
+                                       Maximum="{TemplateBinding ScrollableWidth}"
                                        Visibility="Collapsed"
-                                       Value="{TemplateBinding HorizontalOffset}" 
-                                       ViewportSize="{TemplateBinding ViewportWidth}" 
+                                       Value="{TemplateBinding HorizontalOffset}"
+                                       ViewportSize="{TemplateBinding ViewportWidth}"
                                        Style="{StaticResource TinyScrollBar}"
-                                       Minimum="0" 
-                                       Opacity="0" 
+                                       Minimum="0"
+                                       Opacity="0"
                                        />
 
                         </Grid>
@@ -427,7 +427,7 @@
                               CornerRadius="2"
                               KeyboardNavigation.TabNavigation="Local"
                               KeyboardNavigation.DirectionalNavigation="Contained"
-                              KeyboardNavigation.TabIndex="2">  
+                              KeyboardNavigation.TabIndex="2">
                             <ContentPresenter x:Name="PART_SelectedContentHost"
                               Margin="4"
                               ContentSource="SelectedContent" />
@@ -479,7 +479,7 @@
                               BorderThickness="1,1,1,1"
                               CornerRadius="2,12,0,0"
                               Background="{StaticResource ControlBackgroundBrush}">
-                            
+
                             <ContentPresenter x:Name="ContentSite"
                               VerticalAlignment="Center"
                               HorizontalAlignment="Center"
@@ -543,7 +543,7 @@
                             BorderThickness="1"
                             BorderBrush="{StaticResource ControlBorderBrush}"
                             Background="{StaticResource ControlBackgroundBrush}">
-                        
+
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
                                 <VisualStateGroup.Transitions>

@@ -17,7 +17,7 @@ namespace LogViewer.Model
 
         public string Type { get; set; }
 
-        // in case the Name is not unique (as is the case with multi_id formats in px4 logs) 
+        // in case the Name is not unique (as is the case with multi_id formats in px4 logs)
         // the IDataLog implementor can use this field instead.
         public int Id { get; set; }
 
@@ -52,7 +52,7 @@ namespace LogViewer.Model
         public bool HasChildren
         {
             get
-            {                
+            {
                 return childItems != null && childItems.Count > 0;
             }
         }
@@ -84,7 +84,7 @@ namespace LogViewer.Model
         internal void Combine(LogItemSchema s)
         {
             Dictionary<string, LogItemSchema> index = new Dictionary<string, Model.LogItemSchema>();
-            
+
             if (this.HasChildren)
             {
                 lock (this.childItems)
@@ -140,7 +140,7 @@ namespace LogViewer.Model
             {
                 return false;
             }
-            lock (this.childItems) 
+            lock (this.childItems)
             {
                 return (from c in this.childItems where c.Name == name select c).Any();
             }

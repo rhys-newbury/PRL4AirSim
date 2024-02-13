@@ -1,21 +1,21 @@
 # Object Detection
 
 ## About
-This feature lets you generate object detection using existing cameras in AirSim, similar to detection DNN.   
-Using the API you can control which object to detect by name and radius from camera.   
+This feature lets you generate object detection using existing cameras in AirSim, similar to detection DNN.
+Using the API you can control which object to detect by name and radius from camera.
 One can control these settings for each camera, image type and vehicle combination separately.
 
 ## API
-- Set mesh name to detect in wildcard format   
-```simAddDetectionFilterMeshName(camera_name, image_type, mesh_name, vehicle_name = '')```   
+- Set mesh name to detect in wildcard format
+```simAddDetectionFilterMeshName(camera_name, image_type, mesh_name, vehicle_name = '')```
 
-- Clear all mesh names previously added   
-```simClearDetectionMeshNames(camera_name, image_type, vehicle_name = '')```   
+- Clear all mesh names previously added
+```simClearDetectionMeshNames(camera_name, image_type, vehicle_name = '')```
 
-- Set detection radius in cm   
-```simSetDetectionFilterRadius(camera_name, image_type, radius_cm, vehicle_name = '')```   
+- Set detection radius in cm
+```simSetDetectionFilterRadius(camera_name, image_type, radius_cm, vehicle_name = '')```
 
-- Get detections   
+- Get detections
 ```simGetDetections(camera_name, image_type, vehicle_name = '')```
 
 
@@ -40,7 +40,7 @@ client = airsim.MultirotorClient()
 client.confirmConnection()
 
 client.simSetDetectionFilterRadius(camera_name, image_type, 80 * 100) # in [cm]
-client.simAddDetectionFilterMeshName(camera_name, image_type, "Cylinder_*") 
+client.simAddDetectionFilterMeshName(camera_name, image_type, "Cylinder_*")
 client.simGetDetections(camera_name, image_type)
 detections = client.simClearDetectionMeshNames(camera_name, image_type)
 ```

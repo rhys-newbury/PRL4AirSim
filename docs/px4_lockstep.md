@@ -39,9 +39,9 @@ in the simulated flight if you look at the updates on screen in realtime.
 
 # Disabling LockStep
 
-If you are running PX4 in cygwin, there is an [open issue with 
-lockstep](https://github.com/microsoft/AirSim/issues/3415). PX4 is configured to use lockstep by 
-default. To disable this feature, first [disable it in 
+If you are running PX4 in cygwin, there is an [open issue with
+lockstep](https://github.com/microsoft/AirSim/issues/3415). PX4 is configured to use lockstep by
+default. To disable this feature, first [disable it in
 PX4](https://docs.px4.io/master/en/simulation/#disable-lockstep-simulation):
 
 1. Navigate to `boards/px4/sitl/` in your local PX4 repository
@@ -53,7 +53,7 @@ PX4](https://docs.px4.io/master/en/simulation/#disable-lockstep-simulation):
     ```
     set(ENABLE_LOCKSTEP_SCHEDULER no)
     ```
-1. Disable it in AirSim by setting `LockStep` to `false` and either removing any `"ClockType": 
+1. Disable it in AirSim by setting `LockStep` to `false` and either removing any `"ClockType":
 "SteppableClock"` setting or resetting `ClockType` back to default:
     ```
         {
@@ -65,5 +65,5 @@ PX4](https://docs.px4.io/master/en/simulation/#disable-lockstep-simulation):
                     "LockStep": false,
                     ...
     ```
-1. Now you can run PX4 SITL as you normally would (`make px4_sitl_default none_iris`) and it will use 
+1. Now you can run PX4 SITL as you normally would (`make px4_sitl_default none_iris`) and it will use
 the host system time without waiting on AirSim.

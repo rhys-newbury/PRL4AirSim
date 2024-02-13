@@ -17,16 +17,16 @@ RUN apt-add-repository ppa:deadsnakes/ppa
 RUN apt-get update
 RUN apt-get install -y \
 	python3.6 \
-	python3-pip 
+	python3-pip
 
 RUN python3.6 -m pip install --upgrade pip
 
 RUN python3.6 -m pip install setuptools wheel
 
-RUN adduser --force-badname --disabled-password --gecos '' --shell /bin/bash airsim_user && \ 
-	echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers && \ 
-	adduser airsim_user sudo && \ 
-	adduser airsim_user audio && \ 
+RUN adduser --force-badname --disabled-password --gecos '' --shell /bin/bash airsim_user && \
+	echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers && \
+	adduser airsim_user sudo && \
+	adduser airsim_user audio && \
 	adduser airsim_user video
 
 USER airsim_user
@@ -34,7 +34,7 @@ WORKDIR /home/airsim_user
 
 # Change the following values to use a different AirSim binary
 # Also change the AIRSIM_EXECUTABLE variable in docker-entrypoint.sh
-ENV AIRSIM_BINARY_ZIP_URL=https://github.com/microsoft/AirSim/releases/download/v1.3.1-linux/Blocks.zip 
+ENV AIRSIM_BINARY_ZIP_URL=https://github.com/microsoft/AirSim/releases/download/v1.3.1-linux/Blocks.zip
 ENV AIRSIM_BINARY_ZIP_FILENAME=Blocks.zip
 
 ENV SDL_VIDEODRIVER_VALUE=offscreen

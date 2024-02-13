@@ -1,7 +1,7 @@
 # simple_flight
 
-If you don't know what the flight controller does, see [What is Flight Controller?](flight_controller.md). 
- 
+If you don't know what the flight controller does, see [What is Flight Controller?](flight_controller.md).
+
 AirSim has a built-in flight controller called simple_flight and it is used by default. You don't need to do anything to use or configure it. AirSim also supports [PX4](px4_setup.md) as another flight controller for advanced users. In the future, we also plan to support [ROSFlight](https://rosflight.org/) and [Hackflight](https://github.com/simondlevy/hackflight).
 
 ## Advantages
@@ -60,7 +60,7 @@ For safety reasons, flight controllers disallow API control unless a human opera
 
       "AllowAPIAlways": true,
       "RC": {
-        "RemoteControlID": 0,      
+        "RemoteControlID": 0,
         "AllowAPIWhenDisconnected": true
       }
     }

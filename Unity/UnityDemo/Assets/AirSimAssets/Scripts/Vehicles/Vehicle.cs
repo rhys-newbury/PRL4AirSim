@@ -173,7 +173,7 @@ namespace AirSimUnity {
         }
 
         public bool SetPose(AirSimPose pose, bool ignore_collision) {
-            poseFromAirLib = pose; 
+            poseFromAirLib = pose;
             return true;
         }
 

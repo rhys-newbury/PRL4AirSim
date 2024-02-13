@@ -126,7 +126,7 @@ else #linux
                 popd
             fi
         fi
-    
+
     else
         echo "Already have good version of cmake: $cmake_ver"
     fi

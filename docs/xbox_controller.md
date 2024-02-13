@@ -10,7 +10,7 @@ To use an XBox controller with AirSim follow these steps:
 
 ![Gamecontrollers](images/qgc_joystick.png)
 
-Now calibrate the radio, and setup some handy button actions.  For example, I set mine so that 
+Now calibrate the radio, and setup some handy button actions.  For example, I set mine so that
 the 'A' button arms the drone, 'B' put it in manual flight mode, 'X' puts it in altitude hold mode
 and 'Y' puts it in position hold mode.  I also prefer the feel of the controller when I check the
 box labelled "Use exponential curve on roll,pitch, yaw" because this gives me more sensitivity for

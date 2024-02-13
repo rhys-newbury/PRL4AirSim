@@ -125,7 +125,7 @@ namespace LogViewer.Model
                                 min = Math.Min(min, time);
                                 max = Math.Max(max, time);
                                 LogEntry row = new Model.LogEntry() { Name = "Other", Timestamp = (ulong)time };
-                                log.Add(row);                                
+                                log.Add(row);
                                 Dictionary<string, LogEntry> groups = new Dictionary<string, LogEntry>();
 
                                 if (reader.MoveToFirstAttribute())

@@ -138,10 +138,10 @@ namespace LogViewer.Utilities
             {
                 // DJI converted .dat file format
                 GPSTime = entry.GetField<UInt32>("Time");
-                nSat = entry.GetField<byte>("Visible:GPS"); 
+                nSat = entry.GetField<byte>("Visible:GPS");
                 EPH = (float)entry.GetField<double>("DOP:H");
                 Lat = entry.GetField<double>("Lat");
-                Lon = entry.GetField<double>("Long");                
+                Lon = entry.GetField<double>("Long");
                 Alt = (float)entry.GetField<double>("Alt"); // e
             }
         }

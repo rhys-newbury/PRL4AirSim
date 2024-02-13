@@ -1,6 +1,6 @@
 {
     "recommendations": [
-        "ms-python.python", 
+        "ms-python.python",
         "ms-azuretools.vscode-docker",
         "ms-vscode.powershell"
     ]

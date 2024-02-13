@@ -21,7 +21,7 @@ Below is summarized list of important changes. This does not include minor/less 
 ### Sep 2021
 * [Support for multiple drones in Unity](https://github.com/microsoft/AirSim/pull/3128)
 ### Aug 2021
-* [Control manual camera speed through the keyboard](https://github.com/microsoft/AirSim/pulls?page=6&q=is%3Apr+is%3Aclosed+sort%3Aupdated-desc#:~:text=1-,Control%20manual%20camera%20speed%20through%20the%20keyboard,-%233221%20by%20saihv) 
+* [Control manual camera speed through the keyboard](https://github.com/microsoft/AirSim/pulls?page=6&q=is%3Apr+is%3Aclosed+sort%3Aupdated-desc#:~:text=1-,Control%20manual%20camera%20speed%20through%20the%20keyboard,-%233221%20by%20saihv)
 * Latest release `v1.6.0` for [Windows](https://github.com/microsoft/AirSim/releases/tag/v1.6.0-windows) and [Linux](https://github.com/microsoft/AirSim/releases/tag/v1.6.0-linux)
 * [Fix: DepthPlanar capture](https://github.com/microsoft/AirSim/pull/3907)
 * [Fix: compression bug in segmentation palette](https://github.com/microsoft/AirSim/pull/3937)
@@ -180,7 +180,7 @@ Below is summarized list of important changes. This does not include minor/less 
 ### November, 2018
 * Added Weather Effects and [APIs](apis.md#weather-apis)
 * Added [Time of Day API](apis.md#time-of-day-api)
-* An experimental integration of [AirSim on Unity](https://github.com/Microsoft/AirSim/tree/master/Unity) is now available. Learn more in [Unity blog post](https://blogs.unity3d.com/2018/11/14/airsim-on-unity-experiment-with-autonomous-vehicle-simulation). 
+* An experimental integration of [AirSim on Unity](https://github.com/Microsoft/AirSim/tree/master/Unity) is now available. Learn more in [Unity blog post](https://blogs.unity3d.com/2018/11/14/airsim-on-unity-experiment-with-autonomous-vehicle-simulation).
 * [New environments](https://github.com/Microsoft/AirSim/releases/tag/v1.2.1): Forest, Plains (windmill farm), TalkingHeads (human head simulation), TrapCam (animal detection via camera)
 * Highly efficient [NoDisplay view mode](settings.md#viewmode) to turn off main screen rendering so you can capture images at high rate
 * [Enable/disable sensors](https://github.com/Microsoft/AirSim/pull/1479) via settings
@@ -221,7 +221,7 @@ Below is summarized list of important changes. This does not include minor/less 
 * Configure additional cameras via settings
 * Time of day with geographically computed sun position
 * Better car steering via keyboard
-* Added MeshNamingMethod in segmentation setting 
+* Added MeshNamingMethod in segmentation setting
 * gimbal API
 * getCameraParameters API
 * Ability turn off main rendering to save GPU resources
@@ -270,8 +270,8 @@ Below is summarized list of important changes. This does not include minor/less 
 * We now have the [car model](using_car.md).
 * No need to build the code. Just download [binaries](https://github.com/Microsoft/AirSim/releases) and you are good to go!
 * The [reinforcement learning example](reinforcement_learning.md) with AirSim
-* New built-in flight controller called [simple_flight](simple_flight.md) that "just works" without any additional setup. It is also now *default*. 
-* AirSim now also generates [depth as well as disparity images](image_apis.md) that are in camera plane. 
+* New built-in flight controller called [simple_flight](simple_flight.md) that "just works" without any additional setup. It is also now *default*.
+* AirSim now also generates [depth as well as disparity images](image_apis.md) that are in camera plane.
 * We also have official Linux build now!
 
 ## Sep 2017

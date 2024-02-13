@@ -8,7 +8,7 @@ about: Create a report to help us improve
 <!-- Incomplete reports will lead to closing the issue. -->
 <!-- Also, please test using the latest master make sure your issue has not already been fixed -->
 
-## Bug report 
+## Bug report
 <!-- If any section does not apply, replace its contents with "N/A". -->
 - AirSim Version/#commit:
 - UE/Unity version:

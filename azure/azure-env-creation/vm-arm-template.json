@@ -20,7 +20,7 @@
             "metadata": {
                 "description": "Admin user password for the VM."
             }
-        },        
+        },
         "VmSize": {
             "type": "string",
             "metadata": {
@@ -31,9 +31,9 @@
                 "Standard_NV6_Promo",
                 "Standard_NV6",
                 "Standard_NV12",
-                "Standard_NV24"                
+                "Standard_NV24"
             ]
-        },  
+        },
         "ScriptLocation": {
             "type": "string",
             "metadata": {
@@ -54,7 +54,7 @@
         "NetworkInterfaceCardName": "[concat(parameters('VmName'),'-nic')]",
         "PublicIPAddressName": "[concat(parameters('VmName'),'-ip')]",
         "NetworkSecurityGroupName": "[concat(parameters('VmName'),'-nsg')]",
-        "VirtualNetworkName": "[concat(parameters('VmName'),'-vnet')]"        
+        "VirtualNetworkName": "[concat(parameters('VmName'),'-vnet')]"
     },
     "resources": [
         {
@@ -76,7 +76,7 @@
                             "priority": 300,
                             "direction": "Inbound"
                         }
-                    },                    
+                    },
                     {
                         "name": "SSH",
                         "properties": {
@@ -89,7 +89,7 @@
                             "priority": 320,
                             "direction": "Inbound"
                         }
-                    }                    
+                    }
 
                 ]
             }

@@ -23,7 +23,7 @@ namespace LogViewer.Model
     public class LogEntry : LogField
     {
         public ulong Timestamp { get; set; }
-                
+
         /// <summary>
         /// Return a data value, and try and timestamp in the x-coordinate
         /// </summary>

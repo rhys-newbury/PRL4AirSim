@@ -1,7 +1,7 @@
 # Who is Using AirSim?
 
-#### Would you like to see your own group or project here? 
-Just add a [GitHub issue](https://github.com/microsoft/airsim/issues) with quick details and link to your website. 
+#### Would you like to see your own group or project here?
+Just add a [GitHub issue](https://github.com/microsoft/airsim/issues) with quick details and link to your website.
 
 * [NASA Ames Research Center – Systems Analysis Office](https://www.nasa.gov/ames)
 * [Astrobotic](https://www.astrobotic.com/technology)
@@ -29,4 +29,3 @@ Just add a [GitHub issue](https://github.com/microsoft/airsim/issues) with quick
 * [Myned AI](https://www.myned.ai/)
 * [STPLS3D - University of Southern California Institute for Creative Technologies](http://www.stpls3d.com/)
 * [Central Michigan University](http://www.waynenterprises.com/research)
-

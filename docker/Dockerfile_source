@@ -9,7 +9,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y --no-ins
     x11-xserver-utils
 
 RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers && \
-    adduser ue4 sudo 
+    adduser ue4 sudo
 
 USER ue4
 RUN cd /home/ue4 && \

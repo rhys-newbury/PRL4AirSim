@@ -241,7 +241,7 @@ namespace LogViewer.Model.ULog
             return (ulong)timestamp;
         }
     }
-    
+
     class MessageData : Message
     {
         internal MessageSubscription subscription;
@@ -398,7 +398,7 @@ namespace LogViewer.Model.ULog
 
         private object ReadField(BinaryReader reader, MessageField field)
         {
-            object o = null;            
+            object o = null;
             switch (field.type)
             {
                 case FieldType.Float:
@@ -592,7 +592,7 @@ namespace LogViewer.Model.ULog
         {
             return 0;
         }
-        
+
     }
 
     class MessageParameter<T> : Message
@@ -815,7 +815,7 @@ namespace LogViewer.Model.ULog
                             if (s == MessageData.ArmingStates.ARMING_STATE_ARMED)
                             {
                                 flying = true;
-                            } 
+                            }
                             else
                             {
                                 flying = false;
@@ -1109,7 +1109,7 @@ namespace LogViewer.Model.ULog
         internal MessageInfo ReadInfoMessage(ushort len)
         {
             int keyLen = reader.ReadByte();
-            string key = reader.ReadAsciiString(keyLen); 
+            string key = reader.ReadAsciiString(keyLen);
             int space = key.IndexOf(' ');
             if (space < 0)
             {

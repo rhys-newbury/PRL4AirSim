@@ -10,7 +10,7 @@ using System.Windows.Media.Imaging;
 
 namespace LogViewer.Utilities
 {
-    class Raw8UBitmapDecoder 
+    class Raw8UBitmapDecoder
     {
         List<BitmapFrame> frames;
 
@@ -24,6 +24,6 @@ namespace LogViewer.Utilities
             frames.Add(BitmapFrame.Create(frame));
             return new Raw8UBitmapDecoder() { frames = frames };
         }
-        
+
     }
 }

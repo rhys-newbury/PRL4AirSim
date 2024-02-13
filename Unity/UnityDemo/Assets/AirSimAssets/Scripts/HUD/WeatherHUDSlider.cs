@@ -12,7 +12,7 @@ namespace AirSimUnity {
         public Slider.SliderEvent OnValueChanged;
 
         public float Value
-        { 
+        {
             get {
                 return slider.value;
             }

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows;
 
 namespace LogViewer.Utilities
-{ 
+{
     public enum AppTheme
     {
         Light,
@@ -94,7 +94,7 @@ namespace LogViewer.Utilities
                 }
             }
         }
-    
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 

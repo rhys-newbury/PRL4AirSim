@@ -167,7 +167,7 @@ Furthermore, we modify the `ApiServerPort` and `LocalHostIp` setting when runnin
 
 ## PRL4AirSim Configuration
 
-We provide a `config.json` file which contains all parameters of the experiment.  
+We provide a `config.json` file which contains all parameters of the experiment.
 
 ```json
 {
@@ -203,13 +203,13 @@ There are four components:
 | `PRL4AirSim/Storage.py`   | Replay Buffer       |
 | `PRL4AirSim/Trainer.py`   | Global network parameter trainer      |
 
-Alternatively, we recommend running the airsim and local DQN network on multiple compute units as shown in the figure bellow, thus spreading the GPU and CPU load.  This can be done by running the PyClient and UEBinary remotely, ensuring the IP of the buffer is defined on these machines.  Check out `start.py` on how to do this.  
+Alternatively, we recommend running the airsim and local DQN network on multiple compute units as shown in the figure bellow, thus spreading the GPU and CPU load.  This can be done by running the PyClient and UEBinary remotely, ensuring the IP of the buffer is defined on these machines.  Check out `start.py` on how to do this.
 
 <img src="PRL4AirSim/images/ParallelRLFramework.png" width="70%" />
 
 # PRL4AirSim UnrealEngine and Replay Buffer connection commands
 
-Ape-X enables us to run multiple DQN local instances in parallel (hence parallel RL).  This results in an increased data sample rate from the environmnet.  The bottleneck of AirSim is the high CPU utilisation from the quadrotor dynamics which are calculated every step for each vehicle.  Vectorising the environment can improve memory utilisation 
+Ape-X enables us to run multiple DQN local instances in parallel (hence parallel RL).  This results in an increased data sample rate from the environmnet.  The bottleneck of AirSim is the high CPU utilisation from the quadrotor dynamics which are calculated every step for each vehicle.  Vectorising the environment can improve memory utilisation
 
 
 We have modified the AirLib library to accept new commands that enable vectorised based environment interaction.  Hence, intialise the MultiRotor client normally
@@ -270,7 +270,7 @@ def finishEpisode(self)
 ```
 
 ```python
-# The trainer calls this to sample experiences from the buffer.  We store experiences as a dictionary of numpy arrays 
+# The trainer calls this to sample experiences from the buffer.  We store experiences as a dictionary of numpy arrays
 # which need to be converted to python lists for the RPC server to encode and sent to the trainer client.  See 'Utils.convertStateDicToListDic()'
 def sampleFromStorage(self)
 ```
@@ -311,7 +311,7 @@ Agents will interact with the environment without interacting with each other.
 
 2. DQNetwork and DQNTrainer used for both the PyClient and Trainer
 
-In the future we will break the functionality of both the DQNetwork and DQNTrainer to make it clearer what functions are used for each. 
+In the future we will break the functionality of both the DQNetwork and DQNTrainer to make it clearer what functions are used for each.
 
 3. AirSim and UnrealEngine Coordinate Reference Frame
 

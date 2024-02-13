@@ -407,7 +407,7 @@ namespace AirSimUnity {
         public ImageResponse(List<byte> imageDataInt, List<float> imageDataFloat, string cameraName,
             AirSimVector camera_position, AirSimQuaternion camera_orientation,
             bool pixels_as_float, bool compress, int width, int height, ImageType image_type) {
-        
+
             if (imageDataInt == null) {
                 image_uint_len = 0;
             } else {

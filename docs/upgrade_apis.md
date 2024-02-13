@@ -16,7 +16,7 @@ use this:
 import airsim
 ```
 
-Above assumes you have installed AirSim module using, 
+Above assumes you have installed AirSim module using,
 ```
 pip install --user airsim
 ```
@@ -24,7 +24,7 @@ pip install --user airsim
 If you are running you code from PythonClient folder in repo then you can also do this:
 
 ```python
-import setup_path 
+import setup_path
 import airsim
 ```
 
@@ -87,7 +87,7 @@ In earlier version, we provided several utility methods as part of `AirSimClient
 Instead of,
 
 ```python
-AirSimClientBase.write_png(my_path, img_rgba) 
+AirSimClientBase.write_png(my_path, img_rgba)
 
 AirSimClientBase.wait_key('Press any key')
 ```

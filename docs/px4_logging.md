@@ -76,5 +76,3 @@ Here you see the `update_rate` sticking the target of 333 updates per second.
 You also see the `update_time` a nice flat 39 microseconds and the `actuator_delay`
 somewhere between 1.1 and 1.7 milliseconds, and the resulting `actuator_controls`
 a lovely flat line.
-
-

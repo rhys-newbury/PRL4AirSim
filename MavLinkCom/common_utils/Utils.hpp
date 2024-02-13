@@ -60,7 +60,7 @@ using std::experimental::optional;
 
 /*
     This file is collection of routines that can be included in ANY project just
-    by dropping in common_utils.hpp. Therefore there should not be any dependency 
+    by dropping in common_utils.hpp. Therefore there should not be any dependency
     in the code below other than STL. The code should be able to compilable on
     all major platforms.
 */

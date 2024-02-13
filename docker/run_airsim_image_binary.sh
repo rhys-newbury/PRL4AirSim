@@ -36,7 +36,7 @@ fi
 
 # this are the first (maximum) four arguments which the user specifies:
 # ex: ./run_airsim_image.sh /PATH/TO/UnrealBinary/UnrealBinary.sh -windowed -ResX=1080 -ResY=720
-# we save them in a variable right now:  
+# we save them in a variable right now:
 UNREAL_BINARY_COMMAND="$UNREAL_BINARY_SHELL_ABSPATH $3 $4 $5"
 
 # now let's check if user specified  an "-- headless" parameter in the end
@@ -45,13 +45,13 @@ SDL_VIDEODRIVER_VALUE='';
 while [ -n "$1" ]; do
     case "$1" in
     --)
-        shift 
+        shift
         break
-        ;; 
+        ;;
     esac
     shift
 done
- 
+
 for param in $@; do
     case "$param" in
     headless) SDL_VIDEODRIVER_VALUE='offscreen' ;;

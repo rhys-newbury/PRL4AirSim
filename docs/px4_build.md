@@ -18,7 +18,7 @@ The full instructions are available on the [dev.px4.io](https://docs.px4.io/mast
 but we've copied the relevant subset of those instructions here for your convenience.
 
 (Note that [BashOnWindows](https://msdn.microsoft.com/en-us/commandline/wsl/install_guide)) can be used to build
-the PX4 firmware, just follow the BashOnWindows instructions at the bottom of this page) then proceed with the 
+the PX4 firmware, just follow the BashOnWindows instructions at the bottom of this page) then proceed with the
 Ubuntu setup for PX4.
 
 ## Build SITL version
@@ -55,7 +55,7 @@ And you should see output that looks like this:
 creating new parameters file
 creating new dataman file
 
-______  __   __    ___ 
+______  __   __    ___
 | ___ \ \ \ / /   /   |
 | |_/ /  \ V /   / /| |
 |  __/   /   \  / /_| |
@@ -123,7 +123,7 @@ found the following parameters are handy:
 param set SYS_MC_EST_GROUP 2
 
 // increase default limits on cruise speed so you can move around a large map more quickly.
-param MPC_XY_CRUISE 10             
+param MPC_XY_CRUISE 10
 param MPC_XY_VEL_MAX 10
 param MPC_Z_VEL_MAX_DN 2
 

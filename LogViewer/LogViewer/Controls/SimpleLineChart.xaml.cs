@@ -68,7 +68,7 @@ namespace LogViewer.Controls
         double visibleCount;
 
         /// <summary>
-        /// Set this property to add the chart to a group of charts.  The group will share the same "scale" information across the 
+        /// Set this property to add the chart to a group of charts.  The group will share the same "scale" information across the
         /// combined chart group so that the charts line up under each other if they are arranged in a stack (if the group has
         /// ScaleIndependently set to true).
         /// </summary>
@@ -205,7 +205,7 @@ namespace LogViewer.Controls
                 _updateTimer.Stop();
                 _updateTimer = null;
             }
-        }        
+        }
 
         void OnUpdateTimerTick(object sender, object e)
         {
@@ -223,7 +223,7 @@ namespace LogViewer.Controls
         {
             _delayedUpdates.StartDelayedAction("Update", UpdateChart, TimeSpan.FromMilliseconds(30));
         }
-        
+
         MatrixTransform scaleTransform = new MatrixTransform();
 
         internal void ZoomTo(double x, double width)
@@ -262,7 +262,7 @@ namespace LogViewer.Controls
             ApplyScale(info);
             InvalidateArrange();
         }
-        
+
         public void SetData(DataSeries series)
         {
             this.dirty = true;
@@ -436,7 +436,7 @@ namespace LogViewer.Controls
             {
                 this.series = new DataSeries() { Name = "", Values = new List<DataValue>() };
             }
-            
+
             DataValue copy = new Model.DataValue()
             {
                 X = newValue.X,
@@ -547,7 +547,7 @@ namespace LogViewer.Controls
             {
                 // just show the tail that fits on screen, since the scaling will not happen on x-axis in this case.
                 var width = this.ActualWidth;
-                
+
                 this.visibleEndIndex = series.Values.Count;
                 this.visibleStartIndex = this.visibleEndIndex;
 
@@ -576,7 +576,7 @@ namespace LogViewer.Controls
             }
 
             double count = series.Values.Count;
-            PathGeometry g = new PathGeometry();            
+            PathGeometry g = new PathGeometry();
             PathFigure f = new PathFigure();
             f.IsClosed = false;
             g.Figures.Add(f);
@@ -604,7 +604,7 @@ namespace LogViewer.Controls
 
         private void AddScaledValues(PathFigure figure, int start, int end)
         {
-            double width = this.ActualWidth;            
+            double width = this.ActualWidth;
             double offset = Canvas.GetLeft(Graph);
             if (end < 0 || end > this.series.Values.Count) end = this.series.Values.Count;
             if (start < 0) start = 0;
@@ -649,7 +649,7 @@ namespace LogViewer.Controls
                             count = 0;
                             sum = 0;
                             previousX = (int)pt.X;
-                        } 
+                        }
                         else
                         {
                             previousX = (int)pt.X;
@@ -706,7 +706,7 @@ namespace LogViewer.Controls
                 HidePointer();
             }
         }
-        
+
         protected override void OnMouseMove(MouseEventArgs e)
         {
             if (anyContextMenuOpen)
@@ -893,7 +893,7 @@ namespace LogViewer.Controls
         {
             PointerLabel.Text = label;
             PointerBorder.UpdateLayout();
-            
+
             double tipPositionX = pos.X;
             if (tipPositionX + PointerBorder.ActualWidth > this.ActualWidth)
             {
@@ -955,7 +955,7 @@ namespace LogViewer.Controls
         protected override Size ArrangeOverride(Size arrangeBounds)
         {
             if (arrangeBounds != layoutSize || this.dirty)
-            { 
+            {
                 this.dirty = true;
                 DelayedUpdate();
             }
@@ -1021,7 +1021,7 @@ namespace LogViewer.Controls
                     Point point = GetScaledValue(d);
                     if (point.X >= 0 && point.X <= w)
                     {
-                        // then it is a visible point.                        
+                        // then it is a visible point.
                         yield return d;
                     }
                 }
@@ -1047,7 +1047,7 @@ namespace LogViewer.Controls
                     point.X += offset;
                     if (point.X >= 0 && point.X <= w)
                     {
-                        // then it is a visible point.                        
+                        // then it is a visible point.
                         yield return point;
                     }
                 }
@@ -1120,7 +1120,7 @@ namespace LogViewer.Controls
             Point end = new Point(point2.X, a + (b * point2.X));
 
             Line line = new Line() {
-                Stroke = Graph.Stroke, StrokeThickness = 1, X1 = start.X, Y1 = start.Y, X2 = end.X, Y2 = end.Y,            
+                Stroke = Graph.Stroke, StrokeThickness = 1, X1 = start.X, Y1 = start.Y, X2 = end.X, Y2 = end.Y,
                 StrokeDashArray = new DoubleCollection(new double[] { 2, 2 })
             };
             AdornerCanvas.Children.Add(line);
@@ -1245,7 +1245,7 @@ namespace LogViewer.Controls
                 return;
             }
             double mean = MathHelpers.Mean(points);
-            
+
             // now scale this line to fit the scaled graph
             Point start = new Point(first.X, mean);
             Point end = new Point(last.X, mean);
@@ -1337,9 +1337,9 @@ namespace LogViewer.Controls
             if (DisplayMessage != null)
             {
                 DisplayMessage(this, string.Format(@"Analyzing {0} data values from '{6}':
-  minimum  {1} ({1:0.####E+0}), 
+  minimum  {1} ({1:0.####E+0}),
   maximum  {2} ({2:0.####E+0})
-  mean     {3} ({3:0.####E+0}), 
+  mean     {3} ({3:0.####E+0}),
   variance {4} ({4:0.####E+0}),
   stddev   {5} ({5:0.####E+0})",
   count, min, max, mean, variance, stddev, this.series.Name));

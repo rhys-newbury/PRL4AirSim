@@ -15,8 +15,8 @@ sudo apt-get install libgazebo9-dev
 
 ### AirLib
 
-This project is built with GCC 8, so AirLib needs to be built with GCC 8 too. 
-Run from your AirSim root folder:  
+This project is built with GCC 8, so AirLib needs to be built with GCC 8 too.
+Run from your AirSim root folder:
 ```
 ./clean.sh
 ./setup.sh
@@ -30,14 +30,14 @@ The AirSim UE plugin needs to be built with clang, so you can't use the one comp
 
 ### AirSim settings
 
-Inside your `settings.json` file you need to add this line:  
-`"PhysicsEngineName":"ExternalPhysicsEngine"`.  
+Inside your `settings.json` file you need to add this line:
+`"PhysicsEngineName":"ExternalPhysicsEngine"`.
 You may want to change the visual model of the AirSim drone, for that you can follow [this tutorial.](https://youtu.be/Bp86WiLUC80)
 
 
-## Build 
+## Build
 
-Execute this from your AirSim root folder:  
+Execute this from your AirSim root folder:
 ```
 cd GazeboDrone
 mkdir build && cd build
@@ -53,4 +53,3 @@ First run the AirSim simulator and your Gazebo model and then execute this from 
 cd GazeboDrone/build
 ./GazeboDrone
 ```
-

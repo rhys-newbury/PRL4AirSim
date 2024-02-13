@@ -48,7 +48,7 @@ graphics card running the Modular Neighborhood map, using cooked debug bits, no 
 The simulator can still function and fly correctly when all this is going on even in the worse case because the physics is decoupled from the rendering.  However if the delay gets too high such that the communication with PX4 hardware is interrupted due to overly busy CPU then the flight can stall due to timeout in the offboard control messages.
 
 On the computer where this was measured the drone could fly the path.py program
-without any problems with all views open, and with 3 python scripts running 
+without any problems with all views open, and with 3 python scripts running
 to capture each view type.  But there was one stall during this flight, but it
 recovered gracefully and completed the path.  So it was right on the limit.
 

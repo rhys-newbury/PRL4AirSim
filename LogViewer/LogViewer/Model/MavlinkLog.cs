@@ -108,7 +108,7 @@ namespace LogViewer.Model
                     object value = fi.GetValue(row);
                     double x = (double)(msg.Ticks - startTicks);
                     DataValue data = new DataValue() { X = x, UserData = msg }; // microseconds.
-                    
+
                     // byte array is special (we treat this like text).
                     if (value is byte[])
                     {
@@ -420,7 +420,7 @@ namespace LogViewer.Model
             lock (data)
             {
                 this.data.Add(msg);
-                
+
                 if (msg.TypedValue is MAVLink.mavlink_param_value_t)
                 {
                     MAVLink.mavlink_param_value_t param = (MAVLink.mavlink_param_value_t)msg.TypedValue;
@@ -482,7 +482,7 @@ namespace LogViewer.Model
         }
 
         public IEnumerable<string> GetStatusMessages()
-        { 
+        {
             // compute the min/max servo settings.
             foreach (Message msg in this.data)
             {
@@ -496,7 +496,7 @@ namespace LogViewer.Model
                 }
             }
         }
-        
+
 
         List<Flight> flights;
 
@@ -588,7 +588,7 @@ namespace LogViewer.Model
             byte[] msgBuf = new byte[BUFFER_SIZE];
             GCHandle handle = GCHandle.Alloc(msgBuf, GCHandleType.Pinned);
             IntPtr ptr = handle.AddrOfPinnedObject();
-            
+
             DateTime lastTime = DateTime.MinValue;
 
             await Task.Run(() =>
@@ -622,7 +622,7 @@ namespace LogViewer.Model
                                     {
                                         checkCrc = false;
                                         continue;
-                                    }                                     
+                                    }
                                 }
 
                                 if (checkCrc && !header.IsValidCrc(msgBuf, read))

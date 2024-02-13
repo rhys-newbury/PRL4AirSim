@@ -68,7 +68,7 @@ namespace LogViewer.Controls
 
         // Using a DependencyProperty as the backing store for CameraPosition.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CameraPositionProperty =
-            DependencyProperty.Register("CameraPosition", typeof(Vector3D), typeof(MeshViewer), new PropertyMetadata(new Vector3D(0,0,0), 
+            DependencyProperty.Register("CameraPosition", typeof(Vector3D), typeof(MeshViewer), new PropertyMetadata(new Vector3D(0,0,0),
                 new PropertyChangedCallback(OnCameraPositionChanged)));
 
         private static void OnCameraPositionChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -87,7 +87,7 @@ namespace LogViewer.Controls
             Update();
         }
 
-        void Update() { 
+        void Update() {
 
             PerspectiveCamera camera = (PerspectiveCamera)MainViewPort.Camera;
             Vector3D position = (Vector3D)CameraPosition;

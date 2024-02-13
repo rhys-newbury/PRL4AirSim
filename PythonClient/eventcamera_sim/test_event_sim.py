@@ -65,7 +65,9 @@ class AirSimEventGen:
 if __name__ == "__main__":
     args = parser.parse_args()
 
-    event_generator = AirSimEventGen(args.width, args.height, save=args.save, debug=args.debug)
+    event_generator = AirSimEventGen(
+        args.width, args.height, save=args.save, debug=args.debug
+    )
     i = 0
     start_time = 0
     t_start = time.time()

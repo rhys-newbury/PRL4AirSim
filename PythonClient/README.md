@@ -17,4 +17,3 @@ Some examples also requires opencv.
 
 More information on AirSim Python APIs can be found at:
 https://github.com/Microsoft/AirSim/blob/master/docs/python.md
-

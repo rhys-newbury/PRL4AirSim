@@ -142,7 +142,7 @@ namespace LogViewer.Model
                     Timestamp = (ulong)current.Ticks
                 };
                 gps.SetField("TimeMS", (UInt32)((current - startTime).Milliseconds));
-                gps.SetField("Lat", lat);                
+                gps.SetField("Lat", lat);
                 gps.SetField("Lng", lng);
                 gps.SetField("Alt", alt);
                 log.Add(gps);
@@ -159,7 +159,7 @@ namespace LogViewer.Model
             foreach (var item in items)
             {
                 // is this a new item we haven't seen before?
-                
+
                 if (!schema.HasChild(item.Name))
                 {
                     var typeName = item.Name;

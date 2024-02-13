@@ -11,7 +11,7 @@
   <buildtool_depend>ament_cmake</buildtool_depend>
 
   <member_of_group>rosidl_interface_packages</member_of_group>
-  
+
   <build_depend>geometry_msgs</build_depend>
   <build_depend>image_transport</build_depend>
   <build_depend>message_runtime</build_depend>
@@ -24,13 +24,13 @@
   <build_depend>geographic_msgs</build_depend>
   <build_depend>geometry_msgs</build_depend>
   <build_depend>tf2_sensor_msgs</build_depend>
-  
+
   <depend>airsim_interfaces</depend>
 
   <build_depend>builtin_interfaces</build_depend>
   <exec_depend>builtin_interfaces</exec_depend>
   <build_depend>rosidl_default_generators</build_depend>
-  
+
   <exec_depend>geometry_msgs</exec_depend>
   <exec_depend>image_transport</exec_depend>
   <exec_depend>message_generation</exec_depend>

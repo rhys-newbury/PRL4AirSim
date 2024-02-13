@@ -27,10 +27,9 @@ list(APPEND CMAKE_CXX_FLAGS "${GAZEBO_CXX_FLAGS}")
 add_executable(${PROJECT_NAME} src/main.cpp)
 
 target_link_libraries(
-    ${PROJECT_NAME} 
+    ${PROJECT_NAME}
     ${GAZEBO_LIBRARIES}
     pthread
     AirLib
     rpc
 )
-

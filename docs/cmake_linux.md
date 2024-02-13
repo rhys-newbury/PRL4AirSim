@@ -13,7 +13,7 @@ Now you have to run this command by itself (it is interactive)
 sh cmake-3.10.2-Linux-x86_64.sh --prefix ~/cmake-3.10.2
 ```
 
-Answer 'n' to the question about creating another cmake-3.10.2-Linux-x86_64 folder and then 
+Answer 'n' to the question about creating another cmake-3.10.2-Linux-x86_64 folder and then
 ```
 sudo update-alternatives --install /usr/bin/cmake cmake ~/cmake-3.10.2/bin/cmake 60
 ```

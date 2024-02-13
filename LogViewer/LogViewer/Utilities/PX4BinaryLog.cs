@@ -22,8 +22,8 @@ namespace MissionPlanner.Log
         private LogType logType;
         private IntPtr _logFormatPtr;
         private byte[] _logFormatBuffer;
-        public const byte HEAD_BYTE1 = 0xA3; // Decimal 163  
-        public const byte HEAD_BYTE2 = 0x95; // Decimal 149  
+        public const byte HEAD_BYTE1 = 0xA3; // Decimal 163
+        public const byte HEAD_BYTE2 = 0x95; // Decimal 149
         ulong currentTime;
 
         [StructLayout(LayoutKind.Sequential, Pack = 1)]
@@ -40,7 +40,7 @@ namespace MissionPlanner.Log
         }
 
         public ulong CurrentTime {  get { return currentTime; } }
-        
+
         public bool GenerateParser { get; set; }
 
         public PX4BinaryLog(LogType logType)
@@ -621,22 +621,22 @@ namespace MissionPlanner.Log
 
         Dictionary<int, LogEntryFMT> packettypecache = new Dictionary<int, LogEntryFMT>();
 
-        /*  
-    105    +Format characters in the format string for binary log messages  
-    106    +  b   : int8_t  
-    107    +  B   : uint8_t  
-    108    +  h   : int16_t  
-    109    +  H   : uint16_t  
-    110    +  i   : int32_t  
-    111    +  I   : uint32_t  
-    112    +  f   : float  
+        /*
+    105    +Format characters in the format string for binary log messages
+    106    +  b   : int8_t
+    107    +  B   : uint8_t
+    108    +  h   : int16_t
+    109    +  H   : uint16_t
+    110    +  i   : int32_t
+    111    +  I   : uint32_t
+    112    +  f   : float
          *     d   : double
-    113    +  N   : char[16]  
-    114    +  c   : int16_t * 100  
-    115    +  C   : uint16_t * 100  
-    116    +  e   : int32_t * 100  
-    117    +  E   : uint32_t * 100  
-    118    +  L   : uint32_t latitude/longitude  
+    113    +  N   : char[16]
+    114    +  c   : int16_t * 100
+    115    +  C   : uint16_t * 100
+    116    +  e   : int32_t * 100
+    117    +  E   : uint32_t * 100
+    118    +  L   : uint32_t latitude/longitude
     119    + */
 
 

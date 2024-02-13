@@ -49,7 +49,7 @@ echo Powershell or pwsh not found, please install it.
 goto :eof
 
 :start
-chdir /d %ROOT_DIR% 
+chdir /d %ROOT_DIR%
 
 REM //---------- Check cmake version ----------
 CALL check_cmake.bat
@@ -69,8 +69,8 @@ set RPC_VERSION_FOLDER=rpclib-2.3.0
 IF NOT EXIST external\rpclib\%RPC_VERSION_FOLDER% (
     REM //leave some blank lines because %powershell% shows download banner at top of console
     ECHO(
-    ECHO(   
-    ECHO(   
+    ECHO(
+    ECHO(
     ECHO *****************************************************************************************
     ECHO Downloading rpclib
     ECHO *****************************************************************************************
@@ -81,13 +81,13 @@ IF NOT EXIST external\rpclib\%RPC_VERSION_FOLDER% (
         %powershell% -command "iwr https://github.com/rpclib/rpclib/archive/v2.3.0.zip -OutFile external\rpclib.zip"
     )
     @echo off
-    
+
     REM //remove any previous versions
     rmdir external\rpclib /q /s
 
     %powershell% -command "Expand-Archive -Path external\rpclib.zip -DestinationPath external\rpclib"
     del external\rpclib.zip /q
-    
+
     REM //Fail the build if unable to download rpclib
     IF NOT EXIST external\rpclib\%RPC_VERSION_FOLDER% (
         ECHO Unable to download rpclib, stopping build
@@ -102,14 +102,14 @@ cd external\rpclib\%RPC_VERSION_FOLDER%\build
 cmake -G"Visual Studio 16 2019" ..
 
 if "%buildMode%" == "" (
-cmake --build . 
+cmake --build .
 cmake --build . --config Release
 ) else (
 cmake --build . --config %buildMode%
 )
 
 if ERRORLEVEL 1 goto :buildfailed
-chdir /d %ROOT_DIR% 
+chdir /d %ROOT_DIR%
 
 REM //---------- copy rpclib binaries and include folder inside AirLib folder ----------
 set RPCLIB_TARGET_LIB=AirLib\deps\rpclib\lib\x64
@@ -130,14 +130,14 @@ IF NOT EXIST Unreal\Plugins\AirSim\Content\VehicleAdv mkdir Unreal\Plugins\AirSi
 IF NOT EXIST Unreal\Plugins\AirSim\Content\VehicleAdv\SUV\v1.2.0 (
     IF NOT DEFINED noFullPolyCar (
         REM //leave some blank lines because %powershell% shows download banner at top of console
-        ECHO(   
-        ECHO(   
-        ECHO(   
+        ECHO(
+        ECHO(
+        ECHO(
         ECHO *****************************************************************************************
         ECHO Downloading high-poly car assets.... The download is ~37MB and can take some time.
         ECHO To install without this assets, re-run build.cmd with the argument --no-full-poly-car
         ECHO *****************************************************************************************
-       
+
         IF EXIST suv_download_tmp rmdir suv_download_tmp /q /s
         mkdir suv_download_tmp
         @echo on
@@ -152,7 +152,7 @@ IF NOT EXIST Unreal\Plugins\AirSim\Content\VehicleAdv\SUV\v1.2.0 (
         rmdir /S /Q Unreal\Plugins\AirSim\Content\VehicleAdv\SUV
         %powershell% -command "Expand-Archive -Path suv_download_tmp\car_assets.zip -DestinationPath Unreal\Plugins\AirSim\Content\VehicleAdv"
         rmdir suv_download_tmp /q /s
-        
+
         REM //Don't fail the build if the high-poly car is unable to be downloaded
         REM //Instead, just notify users that the gokart will be used.
         IF NOT EXIST Unreal\Plugins\AirSim\Content\VehicleAdv\SUV ECHO Unable to download high-polycount SUV. Your AirSim build will use the default vehicle.
@@ -184,7 +184,7 @@ REM //---------- now we have all dependencies to compile AirSim.sln which will a
 if "%buildMode%" == "" (
 msbuild -maxcpucount:12 /p:Platform=x64 /p:Configuration=Debug AirSim.sln
 if ERRORLEVEL 1 goto :buildfailed
-msbuild -maxcpucount:12 /p:Platform=x64 /p:Configuration=Release AirSim.sln 
+msbuild -maxcpucount:12 /p:Platform=x64 /p:Configuration=Release AirSim.sln
 if ERRORLEVEL 1 goto :buildfailed
 ) else (
 msbuild -maxcpucount:12 /p:Platform=x64 /p:Configuration=%buildMode% AirSim.sln
@@ -212,8 +212,5 @@ echo(
 echo #### Build failed - see messages above. 1>&2
 
 :buildfailed_nomsg
-chdir /d %ROOT_DIR% 
+chdir /d %ROOT_DIR%
 exit /b 1
-
-
-

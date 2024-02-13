@@ -122,7 +122,7 @@ namespace airlib
                 }
 
                 //Now we can use (linear_vel, to_orientation) for vehicle commands
-                
+
                 //For ComputerVision mode, we will just create new pose
                 Pose contrained_next_pose(current_pose.position + linear_vel * params_.control_loop_period,
                     to_orientation);
@@ -207,7 +207,7 @@ namespace airlib
                 }
 
                 //Now we can use (linear_vel, to_orientation) for vehicle commands
-                
+
                 //For ComputerVision mode, we will just create new pose
                 Pose contrained_next_pose(current_pose.position + linear_vel * params_.control_loop_period,
                     to_orientation);
@@ -224,7 +224,7 @@ namespace airlib
         }
 
     protected:
-        /* 
+        /*
     depth_image is 2D float array for which width and height are specified in Params
 	goal is specified in world frame and typically provided by the global planner
 	current_pose is current pose of the vehicle in world frame

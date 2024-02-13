@@ -36,7 +36,7 @@ stages:
               ./update_from_git.sh
             workingDirectory: Unreal/Environments/Blocks
             displayName: Copy AirLib to Blocks (update_from_git.sh)
-            
+
           # Build Blocks
           - script: |
               $(UE4_ROOT)/Engine/Build/BatchFiles/Linux/Build.sh Blocks Linux Development \
@@ -44,7 +44,7 @@ stages:
               $(UE4_ROOT)/Engine/Build/BatchFiles/Linux/Build.sh BlocksEditor Linux Development \
                 -project=$(pwd)/Unreal/Environments/Blocks/Blocks.uproject
             displayName: Build Blocks - Development
-     
+
           # Package Blocks
           - script: |
               $(UE4_ROOT)/Engine/Build/BatchFiles/RunUAT.sh BuildCookRun \
@@ -53,7 +53,7 @@ stages:
                 -archive -archivedirectory="$(pwd)/Unreal/Environments/Blocks/Packaged/Development" \
                 -clientconfig=Development -clean -utf8output
             displayName: Package Blocks - Development
-            
+
           # Publish Artifact for Blocks Linux
           - task: PublishPipelineArtifact@1
             inputs:

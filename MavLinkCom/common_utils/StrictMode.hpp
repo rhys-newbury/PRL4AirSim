@@ -74,7 +74,7 @@ _Pragma("clang diagnostic ignored \"-Wunused-variable\"")         \
                                                 _Pragma("GCC diagnostic ignored \"-Wundef\"")      \
                                                     _Pragma("GCC diagnostic ignored \"-Wunused-parameter\"")
 
-/* Addition options that can be enabled 
+/* Addition options that can be enabled
     _Pragma("GCC diagnostic ignored \"-Wpedantic\"")                \
     _Pragma("GCC diagnostic ignored \"-Wformat=\"")                 \
     _Pragma("GCC diagnostic ignored \"-Werror\"")                   \

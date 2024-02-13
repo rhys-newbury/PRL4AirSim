@@ -26,7 +26,7 @@ namespace Microsoft.Storage
     /// <typeparam name="T">Data type to serialize/deserialize</typeparam>
     public class IsolatedStorage<T>
     {
-        Dictionary<string, int> locks = new Dictionary<string, int>();        
+        Dictionary<string, int> locks = new Dictionary<string, int>();
 
         public IsolatedStorage()
         {

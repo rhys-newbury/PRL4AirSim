@@ -41,7 +41,7 @@ namespace LogViewer.Gestures
             MinFlickThreshold = 5.0;
         }
 
-        public event EventHandler Changed;        
+        public event EventHandler Changed;
 
         private void OnChanged()
         {
@@ -60,7 +60,7 @@ namespace LogViewer.Gestures
             }
         }
 
-                
+
         /// <summary>
         /// This is the rotation being applied by the user.
         /// </summary>
@@ -157,7 +157,7 @@ namespace LogViewer.Gestures
 
                 OnChanged();
             }
-        
+
         }
 
         private void OnMouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)

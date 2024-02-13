@@ -20,7 +20,7 @@ struct MeshPositionVertexBuffersResponse {
 * The position and orientation are in the Unreal coordinate system.
 * The mesh itself is a triangular mesh represented by the vertices and the indices.
 	* The triangular mesh type is typically called a [Face-Vertex](https://en.wikipedia.org/wiki/Polygon_mesh#Face-vertex_meshes) Mesh. This means every triplet of indices hold the indexes of the vertices that make up the triangle/face.
-	* The x,y,z coordinates of the vertices are all stored in a single vector. This means the vertices vector is Nx3 where N is number of vertices. 
+	* The x,y,z coordinates of the vertices are all stored in a single vector. This means the vertices vector is Nx3 where N is number of vertices.
     * The position of the vertices are the global positions in the Unreal coordinate system. This means they have already been transformed by the position and orientation.
 
 ## How to use

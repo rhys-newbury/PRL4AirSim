@@ -18,7 +18,7 @@ issues:
   closeComment: >
     This issue has been automatically closed because it is has not had activity
     from the community in the last year.
-    
+
 pulls:
   daysUntilStale: 1000
   daysUntilClose: 10

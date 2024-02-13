@@ -53,7 +53,7 @@ if $debug; then
     build_dir=build_debug
 else
     build_dir=build_release
-fi 
+fi
 if [ "$(uname)" == "Darwin" ]; then
     # llvm v8 is too old for Big Sur see
     # https://github.com/microsoft/AirSim/issues/3691
@@ -104,7 +104,7 @@ pushd $build_dir  >/dev/null
 if $debug; then
     folder_name="Debug"
     "$CMAKE" ../cmake -DCMAKE_BUILD_TYPE=Debug $CMAKE_VARS \
-        || (popd && rm -r $build_dir && exit 1)   
+        || (popd && rm -r $build_dir && exit 1)
 else
     folder_name="Release"
     "$CMAKE" ../cmake -DCMAKE_BUILD_TYPE=Release $CMAKE_VARS \

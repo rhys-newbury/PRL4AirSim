@@ -8,7 +8,7 @@
             "type": "shell",
             "options": {"shell": {"executable": "powershell.exe"}},
             "command": ".\\start-airsim.ps1"
-            
+
         }
     ]
 }
