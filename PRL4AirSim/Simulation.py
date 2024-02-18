@@ -63,19 +63,20 @@ class Sim(object):
             return
 
         if useNewMethod:
-            requests = [
+            imageMessage = [
                 airsim.ImageRequest(
-                    "depth_cam_{}".format(droneObject.droneId),
+                    "DownwardsCamera",
                     airsim.ImageType.DepthPlanar,
                     True,
                     True,
                 )
                 for droneObject in nonResetingDrones
             ]
-            names = [droneObject.droneName for droneObject in nonResetingDrones]
+            vehicleNames = [f"Drone{i}" for i in range(10)]
+
             beforeTime = time.perf_counter()
             responses_raw = Utils.getClient().client.call(
-                "simGetBatchImages", requests, names
+                "ANSR_simGetBatchImages", imageMessage, vehicleNames
             )
             afterTime = time.perf_counter()
 
@@ -171,11 +172,12 @@ class Sim(object):
                 .getMultirotorState(droneObject.droneName)
                 .kinematics_estimated.linear_velocity
             )
-            y_val_offset = 0
-            if droneObject.currentAction == 0:
-                y_val_offset = self.step_length
-            elif droneObject.currentAction == 1:
-                y_val_offset = -self.step_length
+            y_val_offset = droneObject.currentAction[0].item()
+            # y_val_offset = 0
+            # if droneObject.currentAction == 0:
+            #     y_val_offset = self.step_length
+            # elif droneObject.currentAction == 1:
+            #     y_val_offset = -self.step_length
 
             vx_vec.append(self.constant_x_vel if droneObject.reseting == False else 0)
             vy_vec.append(
@@ -229,12 +231,11 @@ class Sim(object):
             )
             for droneObject in self.droneObjects
         ]
-
-        Utils.getClient().client.call(
-            "simSetVehiclePoseBatch",
-            poses,
-            [droneObject.droneName for droneObject in self.droneObjects],
-        )
+        for p, droneObject in zip(poses, self.droneObjects):
+            print(p, droneObject.droneName)
+            Utils.getClient().simSetVehiclePose(
+                p, ignore_collision=True, vehicle_name=droneObject.droneName
+            )
 
         time.sleep(5) if windows else time.sleep(0.25)
 
@@ -403,8 +404,8 @@ class Sim(object):
             self.resetStep(droneObject)
 
             if droneObject.reseting == False:
-                maxAction, _ = agent.choose_action(droneObject.currentState)
-                droneObject.currentAction = maxAction
+                action = agent.choose_action(droneObject.currentState)
+                droneObject.currentAction = action
 
         self.doActionBatch()
         self.gatherAllObservations()
@@ -418,9 +419,9 @@ class Sim(object):
                 Utils.getModelServer().call_async(
                     "pushMemory",
                     Utils.convertStateDicToListDic(droneObject.previousState),
-                    int(
-                        droneObject.currentAction
-                    ),  # was considered np.int rather than int.
+                    droneObject.currentAction[
+                        0
+                    ].item(),  # was considered np.int rather than int.
                     Utils.convertStateDicToListDic(droneObject.currentState),
                     reward,
                     1 - int(done),

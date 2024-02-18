@@ -1,5 +1,5 @@
 import Utils as Utils
-import DQNTrainer as DQNTrainer
+import TD3Trainer as TD3Trainer
 import datetime
 import time
 import Simulation as Simulation
@@ -43,7 +43,7 @@ if __name__ == "__main__":
     current_time = now.strftime("%H:%M:%S")
     print("start time: ", current_time)
 
-    agent = DQNTrainer.DQNTrainer(
+    agent = TD3Trainer.TD3Trainer(
         image_input_dims=Utils.getConfig()["state_space"],
         n_actions=Utils.getConfig()["action_space"],
         replayMemory_size=Utils.getConfig()["buffer_Size"],

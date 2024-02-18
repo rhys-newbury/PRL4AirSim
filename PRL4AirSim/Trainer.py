@@ -1,10 +1,9 @@
 import msgpackrpc  # install as admin: pip install msgpack-rpc-python
 
-# import distributed.model.DQNTrainer as DQNTrainer
 # https://linuxtut.com/en/70b626ca3ac6fbcdf939/
 import torch
 import pathlib
-import DQNTrainer as DQNTrainer
+import TD3Trainer as TD3Trainer
 import datetime
 import time
 import Utils as Utils
@@ -19,7 +18,7 @@ class Trainer(object):
     def __init__(self):
         self.total_episodes = 0
         self.start_time = None
-        self.agent = DQNTrainer.DQNTrainer(
+        self.agent = TD3Trainer.TD3Trainer(
             image_input_dims=Utils.getConfig()["state_space"],
             n_actions=Utils.getConfig()["action_space"],
             replayMemory_size=Utils.getConfig()["buffer_Size"],
@@ -135,23 +134,24 @@ if __name__ == "__main__":
                     time.perf_counter() - previous_time,
                 )
 
-                if exists("{}/ModelSaves/dqn.pth".format(pathlib.Path().resolve())):
-                    os.rename(
-                        "{}/ModelSaves/dqn.pth".format(pathlib.Path().resolve()),
-                        "{}/ModelSaves/dqn_read.pth".format(pathlib.Path().resolve()),
-                    )
-                    torch.save(
-                        trainer.agent.network.state_dict(),
-                        "{}/ModelSaves/dqn_read.pth".format(pathlib.Path().resolve()),
-                    )
-                    os.rename(
-                        "{}/ModelSaves/dqn_read.pth".format(pathlib.Path().resolve()),
-                        "{}/ModelSaves/dqn.pth".format(pathlib.Path().resolve()),
-                    )
-                else:
-                    torch.save(
-                        trainer.agent.network.state_dict(),
-                        "{}/ModelSaves/dqn.pth".format(pathlib.Path().resolve()),
-                    )
+                # if exists("{}/ModelSaves/dqn.pth".format(pathlib.Path().resolve())):
+                #     os.rename(
+                #         "{}/ModelSaves/dqn.pth".format(pathlib.Path().resolve()),
+                #         "{}/ModelSaves/dqn_read.pth".format(pathlib.Path().resolve()),
+                #     )
+                #     trainer.save()
+                #     torch.save(
+                #         trainer.actor.network.state_dict(),
+                #         "{}/ModelSaves/dqn_read.pth".format(pathlib.Path().resolve()),
+                #     )
+                #     os.rename(
+                #         "{}/ModelSaves/dqn_read.pth".format(pathlib.Path().resolve()),
+                #         "{}/ModelSaves/dqn.pth".format(pathlib.Path().resolve()),
+                #     )
+                # else:
+                #     torch.save(
+                #         trainer.agent.network.state_dict(),
+                #         "{}/ModelSaves/dqn.pth".format(pathlib.Path().resolve()),
+                #     )
 
         previous_time = time.perf_counter()

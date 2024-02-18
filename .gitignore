@@ -404,3 +404,5 @@ PythonClient/docs/_build
 .cache/
 .mypy_cache/3.8
 wandb/*
+PRL4AirSim/wandb
+PRL4AirSim/Linux

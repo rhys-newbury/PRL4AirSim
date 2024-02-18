@@ -1,12 +1,11 @@
 import msgpackrpc  # install as admin: pip install msgpack-rpc-python
 
-# import distributed.model.DQNTrainer as DQNTrainer
 # https://linuxtut.com/en/70b626ca3ac6fbcdf939/
 import numpy as np
 import torch
 import pathlib
 import wandb
-import DQNTrainer as DQNTrainer
+import TD3Trainer as TD3Trainer
 import datetime
 import time
 import Utils as Utils
@@ -26,7 +25,7 @@ class Storage(object):
 
         self.total_episodes = 0
         self.start_time = None
-        self.agent = DQNTrainer.DQNTrainer(
+        self.agent = TD3Trainer.TD3Trainer(
             image_input_dims=Utils.getConfig()["state_space"],
             n_actions=Utils.getConfig()["action_space"],
             replayMemory_size=Utils.getConfig()["buffer_Size"],
@@ -110,7 +109,7 @@ class Storage(object):
             batch = ReplayMemory.Transition(*zip(*sample))
 
             state = [Utils.convertStateDicToListDic(i) for i in batch.state]
-            action = [int(i) for i in batch.action]
+            action = [float(i) for i in batch.action]
             next_state = [Utils.convertStateDicToListDic(i) for i in batch.next_state]
             reward = [float(i) for i in batch.reward]
             not_done = [int(i) for i in batch.not_done]
