@@ -20,12 +20,11 @@ class DroneObject(object):
         self.currentTotalReward = 0
         self.distanceFromGoal = None
 
+        self.currentGoal = None
+
         self.reseting = True
         self.reseting_API = False
         self.reseting_API_2 = False
 
         self.resetTick = 0
         self.resetingTime = time.perf_counter()
-
-    def getCurrentArena(self):
-        return -1 if self.currentArena == None else self.currentArena
