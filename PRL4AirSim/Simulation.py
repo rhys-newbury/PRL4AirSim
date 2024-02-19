@@ -354,45 +354,71 @@ class Sim(object):
         Utils.getClient().simPause(True)
         self.episodes += 1
 
+    def is_collision(self, droneObject: DroneObj):
+        current_collision_time = (
+            Utils.getClient().simGetCollisionInfo(droneObject.droneName).time_stamp
+        )
+        # self.drone.simGetCollisionInfo().time_stamp
+        if current_collision_time != self.collision_time:
+            flag = True
+            self.collision_time = self.drone.simGetCollisionInfo().time_stamp
+        else:
+            flag = False
+
+        return flag
+
+    def is_landing(self, droneObject: DroneObj):
+        # Set a threshold for how close the drone should be to the ground
+        # to consider it landed
+
+        landing_threshold = -0.1  # You may need to adjust this value
+        state = Utils.getClient().getMultirotorState(droneObject.droneName)
+        position = state.kinematics_estimated.position
+        return position.z_val > landing_threshold
+
     def calculateReward(self, droneObject: DroneObj):
         image = droneObject.currentState["image"]
 
-        currentPos_AS = (
+        drone_pos = (
             Utils.getClient()
             .getMultirotorState(droneObject.droneName)
             .kinematics_estimated.position.to_numpy_array()
         )
-        distanceFromGoal = np.linalg.norm(currentPos_AS - droneObject.currentGoal)
-        collisionInfo = Utils.getClient().simGetCollisionInfo(droneObject.droneName)
 
-        hasCollided = collisionInfo.has_collided or image.min() < 0.55
-        if droneObject.currentStep < 2:
-            hasCollided = False
+        potential_reward_weight = 0.20  # TODO: add in config file
+        target_dist_curr = float(np.linalg.norm(droneObject.current_goal - drone_pos))
+        reward += (
+            droneObject.distanceFromGoal - target_dist_curr
+        ) * potential_reward_weight
+        droneObject.distanceFromGoal = target_dist_curr
 
-        done = 0
-        reward_States = {
-            "Collided": 0,
-            "Won": 0,
-            "approaching_collision": 0,
-            "constant_reward": 0,
-            "max_actions": 0,
-            "goal_distance": 0,
-        }
+        info = {}
 
-        reward_States["goal_distance"] = 3.0
+        goal_threshold = 0.30
+        if target_dist_curr < goal_threshold:
+            reward += 1
+            done = True
+            info["is_success"] = True
 
-        if hasCollided:
-            done = 1
-            reward_States["Collided"] = -100
-        elif distanceFromGoal <= 5:
-            done = 1
-            # reward_States["Won"] = 100
-        elif droneObject.currentStep > 400:
-            done = 1
-            reward_States["max_actions"] = -10
+        if self.is_collision():
+            print("The drone has collided with the obstacle!!!")
+            reward += -1
+            info["is_collision"] = True
+            done = True
+        elif self.is_landing():
+            # Check if the drone's altitude is less than the landing threshold
+            print("Drone has touched the ground!!!")
+            reward += -1
+            done = True
+        elif target_dist_curr >= 50:
+            print("The drone has flown out of the specified range!!!")
+            reward += -1
+            done = True
+        elif self.steps > 100:
+            info["is_timeout"] = True
+            reward += -1
+            done = True
 
-        reward = sum(reward_States.values())
-        droneObject.distanceFromGoal = distanceFromGoal
         droneObject.currentTotalReward += reward
         return reward, done
 
