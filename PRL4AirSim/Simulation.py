@@ -11,7 +11,6 @@ import pathlib
 import binvox_rw
 from pathlib import Path
 import matplotlib.pyplot as plt
-
 # from mpl_toolkits.mplot3d import Axes3D
 
 beforeTime = None
@@ -25,7 +24,7 @@ class Sim(object):
         self.origin_UE = np.array([0.0, 0.0, 910.0])
 
         self.create_voxel_grid()
-        binvox_path = Path.cwd() / "block.binvox"
+        binvox_path = Path.cwd() / "training_env.binvox"
 
         with open(binvox_path, "rb") as f:
             self.map = binvox_rw.read_as_3d_array(f)
@@ -42,28 +41,30 @@ class Sim(object):
             origin_UE=self.origin_UE, pos_UE=[8600.0, -4160.0, 1510.0]
         )[2]
         self.actionTime = 1.0
+        self.goal_threshold = 0.30      # TODO: add in config file
         self.resetBatch()
 
     def create_voxel_grid(self):
-        output_path = Path.cwd() / "block.binvox"
+        output_path = Path.cwd() / "training_env.binvox"
         if output_path.exists():
             return
 
-        client = Utils.getClient()
+        client = Utils.getClient() # This doesn't work
+        #client = airsim.VehicleClient()
         center = airsim.Vector3r(0, 0, 0)
         voxel_size = 100
         res = 1
 
-        client.simCreateVoxelGrid(center, 200, 200, voxel_size, res, str(output_path))
-        print("voxel map generated!"())
+        client.simCreateVoxelGrid(center, voxel_size, voxel_size, voxel_size, res, str(output_path))
+        print("voxel map generated!")
 
         with open(output_path, "rb") as f:
             map = binvox_rw.read_as_3d_array(f)
         # Set every below ground level as "occupied". #TODO: add inflation to the map
         map.data[:, :, :50] = True
-        map.data[:, :, 80:] = True
+        map.data[:, :, 70:] = True
         # binvox_edited_path = os.path.join(os.getcwd(), "block_edited.binvox")
-        binvox_edited_path = Path.cwd() / "block_edited.binvox"
+        binvox_edited_path = Path.cwd() / "training_env.binvox"
 
         with open(binvox_edited_path, "wb") as f:
             binvox_rw.write(map, f)
@@ -138,7 +139,6 @@ class Sim(object):
 
         while True:
             iter += 1
-            # print("iteration 2 = " , iter)
             start_point = random.choice(free_space_points)
             end_point = random.choice(free_space_points)
 
@@ -163,7 +163,7 @@ class Sim(object):
 
     def gatherAllObservations(self):
         # nonResetingDrones = []
-        nonResetingDrones = filter(lambda x: not x.resetting, self.droneObjects)
+        nonResetingDrones = [x for x in self.droneObjects if not x.reseting]
         # for droneObject in self.droneObjects:
         #     if not droneObject.reseting:
         #         nonResetingDrones.append(droneObject)
@@ -173,7 +173,7 @@ class Sim(object):
 
         imageMessage = [
             airsim.ImageRequest(
-                "DownwardsCamera",
+                1,
                 airsim.ImageType.DepthPlanar,
                 True,
                 True,
@@ -229,7 +229,7 @@ class Sim(object):
             droneObject.previous_depth_image = imageDepth
 
             droneObject.previousState = droneObject.currentState
-            droneObject.currentState = {"image": stacked_images, "velocity": velocity}
+            droneObject.currentState = {"image": stacked_images, "velocity": velocity, "goal": droneObject.currentGoal}
             droneObject.currentStatePos = (
                 multirotorState.kinematics_estimated.position.to_numpy_array()
             )
@@ -238,41 +238,34 @@ class Sim(object):
         droneNames = []
         vx_vec = []
         vy_vec = []
-        z_vec = []
+        vz_vec = []
 
         for droneObject in self.droneObjects:
             droneNames.append(droneObject.droneName)
-            quad_vel = (
-                Utils.getClient()
-                .getMultirotorState(droneObject.droneName)
-                .kinematics_estimated.linear_velocity
-            )
-            y_val_offset = droneObject.currentAction[0].item()
-            # y_val_offset = 0
-            # if droneObject.currentAction == 0:
-            #     y_val_offset = self.step_length
-            # elif droneObject.currentAction == 1:
-            #     y_val_offset = -self.step_length
+            print("action = ", droneObject.currentAction)
+            vx_val = droneObject.currentAction[0].item() 
+            vy_val = droneObject.currentAction[1].item()
+            vz_val = droneObject.currentAction[2].item()
 
-            vx_vec.append(self.constant_x_vel if not droneObject.reseting else 0)
-            vy_vec.append(
-                quad_vel.y_val + y_val_offset if not droneObject.reseting else 0
-            )
-            z_vec.append(self.constant_z_pos)
+            vx_vec.append(vx_val if not droneObject.reseting else 0)
+            vy_vec.append(vy_val if not droneObject.reseting else 0)
+            vz_vec.append(vz_val if not droneObject.reseting else 0)
+
             droneObject.currentStep += 1
 
         Utils.getClient().simPause(False)
-        Utils.getClient().client.call_async(
-            "moveByVelocityZBatch",
-            vx_vec,
-            vy_vec,
-            z_vec,
-            self.actionTime,
-            airsim.DrivetrainType.MaxDegreeOfFreedom,
-            airsim.YawMode(),
-            droneNames,
-        ).join()
+
+        for i in range(len(droneNames)):
+            Utils.getClient().moveByVelocityBodyFrameAsync(
+                vx_vec[i],
+                vy_vec[i],
+                vz_vec[i],
+                self.actionTime,
+                vehicle_name=droneNames[i]
+            )
+
         Utils.getClient().simPause(True)
+
 
     def resetBatch(self):
         windows = False
@@ -296,7 +289,7 @@ class Sim(object):
                 airsim.Vector3r(*start_poses[i]),
                 airsim.Quaternionr(0.0, 0.0, 0.0, 0.0),
             )
-            for i, _ in range(len(self.droneObjects))
+            for i in range(len(self.droneObjects))
         ]
 
         for p, droneObject in zip(poses, self.droneObjects):
@@ -355,17 +348,11 @@ class Sim(object):
         self.episodes += 1
 
     def is_collision(self, droneObject: DroneObj):
-        current_collision_time = (
-            Utils.getClient().simGetCollisionInfo(droneObject.droneName).time_stamp
-        )
-        # self.drone.simGetCollisionInfo().time_stamp
-        if current_collision_time != self.collision_time:
-            flag = True
-            self.collision_time = self.drone.simGetCollisionInfo().time_stamp
-        else:
-            flag = False
+        collisionInfo = Utils.getClient().simGetCollisionInfo(droneObject.droneName)
 
-        return flag
+        hasCollided = collisionInfo.has_collided
+
+        return hasCollided
 
     def is_landing(self, droneObject: DroneObj):
         # Set a threshold for how close the drone should be to the ground
@@ -378,7 +365,7 @@ class Sim(object):
 
     def calculateReward(self, droneObject: DroneObj):
         image = droneObject.currentState["image"]
-
+        reward = 0
         drone_pos = (
             Utils.getClient()
             .getMultirotorState(droneObject.droneName)
@@ -386,7 +373,7 @@ class Sim(object):
         )
 
         potential_reward_weight = 0.20  # TODO: add in config file
-        target_dist_curr = float(np.linalg.norm(droneObject.current_goal - drone_pos))
+        target_dist_curr = float(np.linalg.norm(droneObject.currentGoal - drone_pos))
         reward += (
             droneObject.distanceFromGoal - target_dist_curr
         ) * potential_reward_weight
@@ -394,18 +381,17 @@ class Sim(object):
 
         info = {}
 
-        goal_threshold = 0.30
-        if target_dist_curr < goal_threshold:
+        if target_dist_curr < self.goal_threshold:
             reward += 1
             done = True
             info["is_success"] = True
 
-        if self.is_collision():
+        if self.is_collision(droneObject):
             print("The drone has collided with the obstacle!!!")
             reward += -1
             info["is_collision"] = True
             done = True
-        elif self.is_landing():
+        elif self.is_landing(droneObject):
             # Check if the drone's altitude is less than the landing threshold
             print("Drone has touched the ground!!!")
             reward += -1
@@ -492,15 +478,16 @@ class Sim(object):
                 self.episodes += 1
 
     def tick(self, agent):
+        
         for droneObject in self.droneObjects:
-            if droneObject.currentStatePos[0] < 5:
+            if float(np.linalg.norm(droneObject.currentGoal -  droneObject.currentStatePos)) < self.goal_threshold:
                 droneObject.reseting = True
 
             self.resetStep(droneObject)
 
             if not droneObject.reseting:
                 action = agent.choose_action(droneObject.currentState)
-                droneObject.currentAction = action
+                droneObject.currentAction = action.cpu().data.numpy()[0]
 
         self.doActionBatch()
         self.gatherAllObservations()

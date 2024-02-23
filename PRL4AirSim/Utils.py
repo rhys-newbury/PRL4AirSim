@@ -130,7 +130,7 @@ def showDepthImage(droneName: str):
 
 
 def convert_pos_UE_to_AS(origin_UE: np.array, pos_UE: np.array):
-    pos = np.zeros(3, dtype=np.float)
+    pos = np.zeros(3, dtype=float)
     pos[0] = pos_UE[0] - origin_UE[0]
     pos[1] = pos_UE[1] - origin_UE[1]
     pos[2] = -pos_UE[2] + origin_UE[2]
