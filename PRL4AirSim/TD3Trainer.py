@@ -232,7 +232,7 @@ class TD3Trainer:
             .float(),
         )
 
-        action = torch.tensor(batch.action).to(device).unsqueeze(dim=-1)
+        action = torch.tensor(batch.action).to(device)
         reward = torch.tensor(batch.reward).to(device).unsqueeze(dim=-1)
         not_done = torch.tensor(batch.not_done).to(device).unsqueeze(dim=-1)
 

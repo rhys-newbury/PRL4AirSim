@@ -109,7 +109,7 @@ class Storage(object):
             batch = ReplayMemory.Transition(*zip(*sample))
 
             state = [Utils.convertStateDicToListDic(i) for i in batch.state]
-            action = [float(i) for i in batch.action]
+            action = [[float(x) for x in i] for i in batch.action]
             next_state = [Utils.convertStateDicToListDic(i) for i in batch.next_state]
             reward = [float(i) for i in batch.reward]
             not_done = [int(i) for i in batch.not_done]

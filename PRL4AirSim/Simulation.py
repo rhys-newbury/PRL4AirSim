@@ -243,7 +243,7 @@ class Sim(object):
         for droneObject in self.droneObjects:
             droneNames.append(droneObject.droneName)
             print("action = ", droneObject.currentAction)
-            vx_val = droneObject.currentAction[0].item() 
+            vx_val = droneObject.currentAction[0].item()
             vy_val = droneObject.currentAction[1].item()
             vz_val = droneObject.currentAction[2].item()
 
@@ -367,7 +367,7 @@ class Sim(object):
         image = droneObject.currentState["image"]
         reward = 0
         done = False
-        
+
         drone_pos = (
             Utils.getClient()
             .getMultirotorState(droneObject.droneName)
@@ -480,7 +480,7 @@ class Sim(object):
                 self.episodes += 1
 
     def tick(self, agent):
-        
+
         for droneObject in self.droneObjects:
             if float(np.linalg.norm(droneObject.currentGoal -  droneObject.currentStatePos)) < self.goal_threshold:
                 droneObject.reseting = True
@@ -503,9 +503,7 @@ class Sim(object):
                 Utils.getModelServer().call_async(
                     "pushMemory",
                     Utils.convertStateDicToListDic(droneObject.previousState),
-                    droneObject.currentAction[
-                        0
-                    ].item(),  # was considered np.int rather than int.
+                    droneObject.currentAction.tolist(),  # was considered np.int rather than int.
                     Utils.convertStateDicToListDic(droneObject.currentState),
                     reward,
                     1 - int(done),
