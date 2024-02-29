@@ -52,7 +52,8 @@ def getConfig():
 def convertStateDicToListDic(state):
     listState = {}
     for key in state:
-        listState[key] = state[key].tolist()
+        print(state[key])
+        listState[key] = state[key][0].tolist()
         # print(listState)
     return listState
 

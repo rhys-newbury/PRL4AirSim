@@ -366,6 +366,8 @@ class Sim(object):
     def calculateReward(self, droneObject: DroneObj):
         image = droneObject.currentState["image"]
         reward = 0
+        done = False
+        
         drone_pos = (
             Utils.getClient()
             .getMultirotorState(droneObject.droneName)
@@ -400,7 +402,7 @@ class Sim(object):
             print("The drone has flown out of the specified range!!!")
             reward += -1
             done = True
-        elif self.steps > 100:
+        elif droneObject.currentStep > 100:
             info["is_timeout"] = True
             reward += -1
             done = True
