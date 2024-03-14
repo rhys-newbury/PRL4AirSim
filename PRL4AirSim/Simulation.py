@@ -11,6 +11,7 @@ import pathlib
 import binvox_rw
 from pathlib import Path
 import matplotlib.pyplot as plt
+
 # from mpl_toolkits.mplot3d import Axes3D
 
 beforeTime = None
@@ -41,7 +42,7 @@ class Sim(object):
             origin_UE=self.origin_UE, pos_UE=[8600.0, -4160.0, 1510.0]
         )[2]
         self.actionTime = 1.0
-        self.goal_threshold = 0.30      # TODO: add in config file
+        self.goal_threshold = 0.30  # TODO: add in config file
         self.resetBatch()
 
     def create_voxel_grid(self):
@@ -49,13 +50,15 @@ class Sim(object):
         if output_path.exists():
             return
 
-        client = Utils.getClient() # This doesn't work
-        #client = airsim.VehicleClient()
+        client = Utils.getClient()  # This doesn't work
+        # client = airsim.VehicleClient()
         center = airsim.Vector3r(0, 0, 0)
         voxel_size = 100
         res = 1
 
-        client.simCreateVoxelGrid(center, voxel_size, voxel_size, voxel_size, res, str(output_path))
+        client.simCreateVoxelGrid(
+            center, voxel_size, voxel_size, voxel_size, res, str(output_path)
+        )
         print("voxel map generated!")
 
         with open(output_path, "rb") as f:
@@ -229,7 +232,11 @@ class Sim(object):
             droneObject.previous_depth_image = imageDepth
 
             droneObject.previousState = droneObject.currentState
-            droneObject.currentState = {"image": stacked_images, "velocity": velocity, "goal": droneObject.currentGoal}
+            droneObject.currentState = {
+                "image": stacked_images,
+                "velocity": velocity,
+                "goal": droneObject.currentGoal,
+            }
             droneObject.currentStatePos = (
                 multirotorState.kinematics_estimated.position.to_numpy_array()
             )
@@ -242,30 +249,35 @@ class Sim(object):
 
         for droneObject in self.droneObjects:
             droneNames.append(droneObject.droneName)
-            print("action = ", droneObject.currentAction)
+            # print("action = ", droneObject.currentAction)
             vx_val = droneObject.currentAction[0].item()
             vy_val = droneObject.currentAction[1].item()
             vz_val = droneObject.currentAction[2].item()
 
-            vx_vec.append(vx_val if not droneObject.reseting else 0)
-            vy_vec.append(vy_val if not droneObject.reseting else 0)
-            vz_vec.append(vz_val if not droneObject.reseting else 0)
+            # vx_vec.append(vx_val if not droneObject.reseting else 0)
+            # vy_vec.append(vy_val if not droneObject.reseting else 0)
+            # vz_vec.append(vz_val if not droneObject.reseting else 0)
+            vx_vec.append(1 if not droneObject.reseting else 0)
+            vy_vec.append(1 if not droneObject.reseting else 0)
+            vz_vec.append(1 if not droneObject.reseting else 0)
 
             droneObject.currentStep += 1
 
         Utils.getClient().simPause(False)
 
         for i in range(len(droneNames)):
+            # if i == 1:
+            #     print(vx_vec[i], vy_vec[i], vz_vec[i])
+            #     print(self.droneObjects[i].currentStatePos)
             Utils.getClient().moveByVelocityBodyFrameAsync(
                 vx_vec[i],
                 vy_vec[i],
                 vz_vec[i],
                 self.actionTime,
-                vehicle_name=droneNames[i]
+                vehicle_name=droneNames[i],
             )
 
         Utils.getClient().simPause(True)
-
 
     def resetBatch(self):
         windows = False
@@ -316,6 +328,7 @@ class Sim(object):
                 .getMultirotorState(droneObject.droneName)
                 .kinematics_estimated.position
             )
+            # print(quad_position, start_pos)
             # Utils.getClient().takeoffAsync(vehicle_name=droneObject.droneName).join()
             # Utils.getClient().hoverAsync(vehicle_name=droneObject.droneName).join()
             Utils.getClient().moveToPositionAsync(
@@ -426,17 +439,26 @@ class Sim(object):
                 start_pos, goal_pos = self.sample_start_goal_pos()
 
                 droneObject.currentGoal = goal_pos
+                droneObject.start_pos = start_pos
 
                 self.agent_start_pos = np.array(start_pos, dtype=np.float64)
+                # print("self.agent_start_pos: ", self.agent_start_pos)
 
-                Utils.getClient().client.call_async(
-                    "resetVehicle",
-                    droneObject.droneName,
-                    airsim.Pose(
-                        airsim.Vector3r(*self.agent_start_pos),
-                        airsim.Quaternionr(0.0, 0.0, 0.0, 0.0),
-                    ),
+                p = airsim.Pose(
+                    airsim.Vector3r(*self.agent_start_pos),
+                    airsim.Quaternionr(0.0, 0.0, 0.0, 1.0),
                 )
+                Utils.getClient().simSetVehiclePose(
+                    p, ignore_collision=True, vehicle_name=droneObject.droneName
+                )
+
+                # Utils.getClient().client.call_async(
+                #     "resetVehicle",
+                #     droneObject.droneName,
+                #
+                # )
+                # Utils.getClient
+
                 droneObject.resetTick = 1
                 droneObject.resetingTime = time.perf_counter()
 
@@ -445,30 +467,44 @@ class Sim(object):
                 and time.perf_counter() - droneObject.resetingTime > 1
             ):
                 # Arm and enable
-                Utils.getClient().armDisarm(True, droneObject.droneName)
-                Utils.getClient().enableApiControl(True, droneObject.droneName)
-                Utils.getClient().takeoffAsync(vehicle_name=droneObject.droneName)
+                # Utils.getClient().takeoffAsync(vehicle_name=droneObject.droneName)
 
                 droneObject.resetingTime = droneObject.resetingTime
                 droneObject.resetTick = 3
 
             if (
-                droneObject.resetTick == 3
-                and time.perf_counter() - droneObject.resetingTime > 2
+                droneObject.resetTick
+                == 3
+                # and time.perf_counter() - droneObject.resetingTime > 2
             ):
-                droneObject.reseting = False
-                droneObject.resetTick = 0
-
                 # Move to estimated state?
                 state = Utils.getClient().getMultirotorState(droneObject.droneName)
-                quad_position = state.kinematics_estimated.position
-                Utils.getClient().moveToPositionAsync(
-                    quad_position.x_val,
-                    quad_position.y_val,
-                    self.constant_z_pos,
-                    3.0,
-                    vehicle_name=droneObject.droneName,
+
+                dist = np.linalg.norm(
+                    droneObject.start_pos
+                    - state.kinematics_estimated.position.to_numpy_array()
                 )
+                if dist < 1:
+                    Utils.getClient().armDisarm(True, droneObject.droneName)
+                    Utils.getClient().enableApiControl(True, droneObject.droneName)
+                    droneObject.reseting = False
+                    droneObject.resetTick = 0
+
+                if time.perf_counter() - droneObject.resetingTime > 5:
+                    droneObject.resetTick = 0
+
+                quad_position = state.kinematics_estimated.position
+                # import pdb; pdb.set_trace()
+                print("dist: ", dist)
+                print("droneObject.start_pos: ", droneObject.start_pos)
+                print("quad position: ", quad_position)
+                # Utils.getClient().moveToPositionAsync(
+                #     quad_position.x_val,
+                #     quad_position.y_val,
+                #     self.constant_z_pos,
+                #     3.0,
+                #     vehicle_name=droneObject.droneName,
+                # )
                 # Initialise the distance from goal
                 current_pos = state.kinematics_estimated.position.to_numpy_array()
                 droneObject.distanceFromGoal = np.linalg.norm(
@@ -480,9 +516,15 @@ class Sim(object):
                 self.episodes += 1
 
     def tick(self, agent):
-
         for droneObject in self.droneObjects:
-            if float(np.linalg.norm(droneObject.currentGoal -  droneObject.currentStatePos)) < self.goal_threshold:
+            if (
+                float(
+                    np.linalg.norm(
+                        droneObject.currentGoal - droneObject.currentStatePos
+                    )
+                )
+                < self.goal_threshold
+            ):
                 droneObject.reseting = True
 
             self.resetStep(droneObject)
@@ -541,7 +583,7 @@ class Sim(object):
             except:
                 print("issue reading file")
 
-        print("NumImagesSent: ", self.numImagesSent)
+        # print("NumImagesSent: ", self.numImagesSent)
 
         finished = True
         for droneObject in self.droneObjects:
