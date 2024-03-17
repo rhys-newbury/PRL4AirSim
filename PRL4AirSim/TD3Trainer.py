@@ -168,12 +168,18 @@ class TD3Trainer:
         if np.random.random() > self.epsilon:
             return (
                 (
-                    torch.tensor([np.random.random() for _ in range(self.n_actions)])
-                    * 2
-                    - 1
+                    (
+                        torch.tensor(
+                            [np.random.random() for _ in range(self.n_actions)]
+                        )
+                        * 2
+                        - 1
+                    )
+                    * self.max_action
                 )
-                * self.max_action
-            ).to(device)
+                .to(device)
+                .unsqueeze(axis=0)
+            )
 
         image = torch.tensor(
             np.reshape(np.array(observation["image"]), (1, *self.image_input_dims)),

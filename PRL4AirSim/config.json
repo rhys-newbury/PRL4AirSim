@@ -12,5 +12,6 @@
   "projectName" : "PathingEnv",
   "envProcesses" : 1,
   "storage_port" : 29000,
-  "headless" : false
+  "headless" : false,
+  "policy_noise": 0.005
 }

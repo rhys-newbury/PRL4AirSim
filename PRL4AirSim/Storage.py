@@ -33,6 +33,7 @@ class Storage(object):
             learningRate=Utils.getConfig()["learning_rate"],
             discount_factor=Utils.getConfig()["discount_factor"],
             epsilon=1.0,
+            policy_noise=Utils.getConfig()["policy_noise"],
             replace_target_count_episode=Utils.getConfig()[
                 "replace_target_count_episode"
             ],

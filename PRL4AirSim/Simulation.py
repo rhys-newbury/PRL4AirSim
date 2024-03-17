@@ -254,12 +254,12 @@ class Sim(object):
             vy_val = droneObject.currentAction[1].item()
             vz_val = droneObject.currentAction[2].item()
 
-            # vx_vec.append(vx_val if not droneObject.reseting else 0)
-            # vy_vec.append(vy_val if not droneObject.reseting else 0)
-            # vz_vec.append(vz_val if not droneObject.reseting else 0)
-            vx_vec.append(1 if not droneObject.reseting else 0)
-            vy_vec.append(1 if not droneObject.reseting else 0)
-            vz_vec.append(1 if not droneObject.reseting else 0)
+            vx_vec.append(vx_val if not droneObject.reseting else 0)
+            vy_vec.append(vy_val if not droneObject.reseting else 0)
+            vz_vec.append(vz_val if not droneObject.reseting else 0)
+            # vx_vec.append(1 if not droneObject.reseting else 0)
+            # vy_vec.append(1 if not droneObject.reseting else 0)
+            # vz_vec.append(1 if not droneObject.reseting else 0)
 
             droneObject.currentStep += 1
 

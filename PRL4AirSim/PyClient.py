@@ -50,6 +50,7 @@ if __name__ == "__main__":
         batch_size=Utils.getConfig()["batch_size"],
         learningRate=Utils.getConfig()["learning_rate"],
         discount_factor=Utils.getConfig()["discount_factor"],
+        policy_noise=Utils.getConfig()["policy_noise"],
         epsilon=1.0,
         replace_target_count_episode=Utils.getConfig()["replace_target_count_episode"],
     )
