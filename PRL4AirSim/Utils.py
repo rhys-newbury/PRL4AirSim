@@ -9,9 +9,8 @@ print(config)
 client = None
 model_server = None
 
-
-def connectClient(trainer_ip_address, ue_ip_address, trainer_port=29000, ue_port=41451):
-    global client, model_server
+def connectUE(ue_ip_address, ue_port):
+    global client
     try:
         client = airsim.MultirotorClient(ip=ue_ip_address, port=ue_port)
         client.confirmConnection()
@@ -22,6 +21,10 @@ def connectClient(trainer_ip_address, ue_ip_address, trainer_port=29000, ue_port
         print("Ip address = {} and port {}".format(ue_ip_address, ue_port))
         print(e)
         exit(1)
+
+    
+def connectModel(trainer_ip_address, trainer_port):
+    global model_server
 
     try:
         model_server = msgpackrpc.Client(
@@ -34,9 +37,14 @@ def connectClient(trainer_ip_address, ue_ip_address, trainer_port=29000, ue_port
         print(e)
         exit(1)
 
-    return client, model_server
+    return model_server
 
 
+def connectClient(trainer_ip_address, ue_ip_address, trainer_port=29000, ue_port=41451):
+    c = connectUE(ue_ip_address, ue_port)
+    m = connectModel(trainer_ip_address, trainer_port)
+    return c, m
+    
 def getClient() -> airsim.MultirotorClient:
     return client
 

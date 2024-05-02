@@ -30,36 +30,37 @@ def changeUEIPJson(port):
     ) as jsonFile:
         json.dump(data, jsonFile, indent=4)
 
+if __name__ == "__main__":
 
-run_command('gnome-terminal -- bash -c "python Storage.py {}'.format(storage_port))
-time.sleep(5)
-run_command('gnome-terminal -- bash -c "python Trainer.py {}'.format(storage_port))
+    run_command('gnome-terminal -- bash -c "python Storage.py {}'.format(storage_port))
+    time.sleep(5)
+    run_command('gnome-terminal -- bash -c "python Trainer.py {}'.format(storage_port))
 
-for i in range(envProcesses):
-    port = storage_port + i + 1
-    changeUEIPJson(port)
-    if headless:
+    for i in range(envProcesses):
+        port = storage_port + i + 1
+        changeUEIPJson(port)
+        if headless:
+            run_command(
+                'gnome-terminal -- bash -c "./Linux/{projectName}.sh -RenderOffscreen -windowed -NoVSync'.format(
+                    projectName=projectName
+                )
+            )
+        else:
+            windowX = 1000 * i
+            windowY = 1000
+
+            run_command(
+                'gnome-terminal -- bash -c "./Linux/{projectName}.sh -windowed -WinX={WinX} -WinY={WinY} -NoVSync'.format(
+                    projectName=projectName, WinX=windowX, WinY=windowY
+                )
+            )
+        time.sleep(4)
+
+    time.sleep(5)
+    for i in range(envProcesses):
+        UE_port = storage_port + i + 1
         run_command(
-            'gnome-terminal -- bash -c "./Linux/{projectName}.sh -RenderOffscreen -windowed -NoVSync'.format(
-                projectName=projectName
+            'gnome-terminal -- bash -c "python PyClient.py {UE_port} {UE_Address} {storage_port}'.format(
+                UE_port=UE_port, UE_Address="127.0.0.1", storage_port=storage_port
             )
         )
-    else:
-        windowX = 1000 * i
-        windowY = 1000
-
-        run_command(
-            'gnome-terminal -- bash -c "./Linux/{projectName}.sh -windowed -WinX={WinX} -WinY={WinY} -NoVSync'.format(
-                projectName=projectName, WinX=windowX, WinY=windowY
-            )
-        )
-    time.sleep(4)
-
-time.sleep(5)
-for i in range(envProcesses):
-    UE_port = storage_port + i + 1
-    run_command(
-        'gnome-terminal -- bash -c "python PyClient.py {UE_port} {UE_Address} {storage_port}'.format(
-            UE_port=UE_port, UE_Address="127.0.0.1", storage_port=storage_port
-        )
-    )

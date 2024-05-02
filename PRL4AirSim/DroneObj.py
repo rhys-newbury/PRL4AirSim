@@ -10,6 +10,8 @@ class DroneObject(object):
         self.currentArena = None
         self.currentStep = 0
         self.droneSpawnOffset = np.array([0, 0 * droneId, 0])
+        
+        self.start_pos = None
 
         self.previous_depth_image = None
 

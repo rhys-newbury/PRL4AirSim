@@ -9,34 +9,9 @@ import numpy as np
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 import ReplayMemory
 
+
 # Implementation of Twin Delayed Deep Deterministic Policy Gradients (TD3)
 # Paper: https://arxiv.org/abs/1802.09477
-
-
-class Actor(nn.Module):
-    def __init__(self, image_input_dims: tuple, action_dim: int, max_action: float):
-        super().__init__()
-
-        self.image_head = ImageHead(image_input_dims)
-        self.vel_fc1 = nn.Linear(3, 16)
-
-        self.out_fc1 = nn.Linear(self.image_head.conv_output_dim + 16, 16)
-        self.out_fc2 = nn.Linear(16, action_dim)
-
-        self.max_action = max_action
-
-    def forward(self, image: torch.tensor, velocity: torch.tensor):
-        image = self.image_head(image)
-
-        velocity = F.relu(self.vel_fc1(velocity))
-
-        concatinated_tensor = torch.cat((image, velocity), 1)
-
-        x = F.relu(self.out_fc1(concatinated_tensor))
-        x = self.out_fc2(x)
-        return torch.tanh(x) * self.max_action
-
-
 class ImageHead(nn.Module):
     def __init__(self, image_input_dims: tuple):
         super().__init__()
@@ -67,23 +42,59 @@ class ImageHead(nn.Module):
         return image.view(image.size()[0], -1)
 
 
+class Actor(nn.Module):
+    def __init__(
+        self,
+        image_input_dims: tuple,
+        action_dim: int,
+        max_action: float,
+        image_extractor=ImageHead,
+    ):
+        super().__init__()
+
+        self.image_head = image_extractor(image_input_dims)
+        self.vel_fc1 = nn.Linear(3, 16)
+
+        self.out_fc1 = nn.Linear(self.image_head.conv_output_dim + 16, 16)
+        self.out_fc2 = nn.Linear(16, action_dim)
+
+        self.max_action = max_action
+
+    def forward(self, image: torch.tensor, velocity: torch.tensor):
+        # x = image[:, 0, :, :].view(image.shape[0], 4096)
+        image = self.image_head(image)
+
+        velocity = F.relu(self.vel_fc1(velocity))
+
+        concatinated_tensor = torch.cat((image, velocity), 1)
+
+        x = F.relu(self.out_fc1(concatinated_tensor))
+        x = self.out_fc2(x)
+        return torch.tanh(x) * self.max_action
+
+
 class Critic(nn.Module):
-    def __init__(self, image_input_dims: tuple, action_dim: int):
+    def __init__(
+        self, image_input_dims: tuple, action_dim: int, image_extractor=ImageHead
+    ):
         super().__init__()
 
         # Q1 architecture
-        self.image_head_1 = ImageHead(image_input_dims)
+        self.image_head_1 = image_extractor(image_input_dims)
         self.vel_fc_1 = nn.Linear(3, 16)
         self.l1_1 = nn.Linear(self.image_head_1.conv_output_dim + 16 + action_dim, 16)
         self.l2_1 = nn.Linear(16, 1)
 
         # Q1 architecture
-        self.image_head_2 = ImageHead(image_input_dims)
+        self.image_head_2 = image_extractor(image_input_dims)
         self.vel_fc_2 = nn.Linear(3, 16)
         self.l1_2 = nn.Linear(self.image_head_2.conv_output_dim + 16 + action_dim, 16)
         self.l2_2 = nn.Linear(16, 1)
 
     def forward(self, image, velocity, action):
+
+        # x = image[:, 0, :, :].view(image.shape[0], 4096)
+
         q1 = self.image_head_1(image)
         v1 = self.vel_fc_1(velocity)
         q1 = torch.cat((q1, v1, action), 1)
@@ -91,14 +102,17 @@ class Critic(nn.Module):
         q1 = self.l2_1(q1)
 
         q2 = self.image_head_2(image)
-        v1 = self.vel_fc_2(velocity)
-        q2 = torch.cat((q2, v1, action), 1)
+        v2 = self.vel_fc_2(velocity)
+        q2 = torch.cat((q2, v2, action), 1)
         q2 = self.l1_2(q2)
         q2 = self.l2_2(q2)
 
         return q1, q2
 
     def Q1(self, image, velocity, action):
+
+        # x = image[:, 0, :, :].view(image.shape[0], 4096)
+
         q1 = self.image_head_1(image)
         v1 = self.vel_fc_1(velocity)
         q1 = torch.cat((q1, v1, action), 1)
@@ -128,17 +142,20 @@ class TD3Trainer:
         noise_clip=0.5,
         policy_freq=2,
         max_action=0.25,
+        image_extractor=ImageHead,
     ):
         self.image_input_dims = image_input_dims
         self.n_actions = n_actions
         self.device = device
-        self.actor = Actor(image_input_dims, n_actions, max_action).to(device)
+        self.actor = Actor(image_input_dims, n_actions, max_action, image_extractor).to(
+            device
+        )
         self.actor_target = copy.deepcopy(self.actor)
         self.actor_optimizer = torch.optim.Adam(
             self.actor.parameters(), lr=learningRate
         )
 
-        self.critic = Critic(image_input_dims, n_actions).to(device)
+        self.critic = Critic(image_input_dims, n_actions, image_extractor).to(device)
         self.critic_target = copy.deepcopy(self.critic)
         self.critic_optimizer = torch.optim.Adam(
             self.critic.parameters(), lr=learningRate
@@ -180,7 +197,10 @@ class TD3Trainer:
                 .to(device)
                 .unsqueeze(axis=0)
             )
-
+        
+        print(observation)
+        
+        
         image = torch.tensor(
             np.reshape(np.array(observation["image"]), (1, *self.image_input_dims)),
             dtype=torch.float,
@@ -239,7 +259,7 @@ class TD3Trainer:
         )
 
         action = torch.tensor(batch.action).to(device)
-        reward = torch.tensor(batch.reward).to(device).unsqueeze(dim=-1)
+        reward = torch.tensor(batch.reward).to(device).unsqueeze(dim=-1).float()
         not_done = torch.tensor(batch.not_done).to(device).unsqueeze(dim=-1)
 
         indices = np.arange(self.batch_size)
