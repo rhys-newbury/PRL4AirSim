@@ -2,7 +2,8 @@ import time
 
 import numpy as np
 
-
+from msgpackrpc.future import Future
+from typing import Optional
 class DroneObject(object):
     def __init__(self, droneId):
         self.droneId = droneId
@@ -29,4 +30,5 @@ class DroneObject(object):
         self.reseting_API_2 = False
 
         self.resetTick = 0
+        self.resetFuture : Optional[Future] = None
         self.resetingTime = time.perf_counter()

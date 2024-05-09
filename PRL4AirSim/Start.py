@@ -33,7 +33,7 @@ def changeUEIPJson(port):
 if __name__ == "__main__":
 
     run_command('gnome-terminal -- bash -c "python Storage.py {}'.format(storage_port))
-    time.sleep(5)
+    time.sleep(10)
     run_command('gnome-terminal -- bash -c "python Trainer.py {}'.format(storage_port))
 
     for i in range(envProcesses):

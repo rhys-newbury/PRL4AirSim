@@ -11,6 +11,7 @@ import pathlib
 import binvox_rw
 from pathlib import Path
 import matplotlib.pyplot as plt
+from msgpackrpc.future import Future
 
 # from mpl_toolkits.mplot3d import Axes3D
 
@@ -134,7 +135,6 @@ class Sim(object):
         return False  # No obstacle found
 
     def sample_start_goal_pos(self):
-        # find free space points
         free_space_points = np.argwhere(self.map.data == 0)
 
         min_distance = 15
@@ -164,9 +164,6 @@ class Sim(object):
                         abs(self.map.translate[2]) - end_point[2],
                     ]
                     
-                    # print(start_point, end_point)
-                    # import pdb; pdb.set_trace()
-
                     return start_pos, goal_pos
 
     def gatherAllObservations(self):
@@ -221,8 +218,6 @@ class Sim(object):
                     np.ones(shape=(self.image_shape[1], self.image_shape[2])) * 30
                 )
             
-            # import pdb; pdb.set_trace
-
             maxDistance = 50
             imageDepth[imageDepth > maxDistance] = maxDistance
             imageDepth = imageDepth.astype(np.uint8)
@@ -245,10 +240,10 @@ class Sim(object):
             droneObject.currentStatePos = (
                 multirotorState.kinematics_estimated.position.to_numpy_array()
             )
-            
+                        
             droneObject.currentState = {
                 "image": stacked_images,
-                "velocity": droneObject.currentGoal - droneObject.currentStatePos,
+                "velocity": velocity,
                 "goal": droneObject.currentGoal - droneObject.currentStatePos,
             }
 
@@ -260,7 +255,6 @@ class Sim(object):
 
         for droneObject in self.droneObjects:
             droneNames.append(droneObject.droneName)
-            # print("action = ", droneObject.currentAction)
             vx_val = droneObject.currentAction[0].item()
             vy_val = droneObject.currentAction[1].item()
             vz_val = droneObject.currentAction[2].item()
@@ -268,10 +262,6 @@ class Sim(object):
             vx_vec.append(vx_val if not droneObject.reseting else 0)
             vy_vec.append(vy_val if not droneObject.reseting else 0)
             vz_vec.append(vz_val if not droneObject.reseting else 0)
-            # vx_vec.append(1 if not droneObject.reseting else 0)
-            # vy_vec.append(1 if not droneObject.reseting else 0)
-            # vz_vec.append(1 if not droneObject.reseting else 0)
-
             droneObject.currentStep += 1
 
         Utils.getClient().simPause(False)
@@ -279,11 +269,7 @@ class Sim(object):
         l = []
 
         for i in range(len(droneNames)):
-            # if i == 1:
-            #     print(vx_vec[i], vy_vec[i], vz_vec[i])
-            #     print(self.droneObjects[i].currentStatePos)
-            # print(vx_vec, vy_vec, vz_vec)
-            # print
+
             l.append(Utils.getClient().moveByVelocityBodyFrameAsync(
                 vx_vec[i],
                 vy_vec[i],
@@ -294,10 +280,6 @@ class Sim(object):
         
         time.sleep(self.actionTime)
         
-        # for i in l:
-        #     print(i)
-        #     i.join()
-
         Utils.getClient().simPause(True)
 
     def resetBatch(self):
@@ -318,11 +300,9 @@ class Sim(object):
 
             self.droneObjects[i].currentGoal = goal_pos
             
-            # start_pos[2] = -100
             self.droneObjects[i].start_pos = start_pos
             start_poses.append(start_pos)
 
-        # airsim.Quaternionr(0.0, 0.0, 1.0, 0.0) = 180 degrees
         poses = [
             airsim.Pose(
                 airsim.Vector3r(*start_poses[i]),
@@ -331,14 +311,6 @@ class Sim(object):
             for i in range(len(self.droneObjects))
         ]
 
-        # for p, droneObject in zip(poses, self.droneObjects):
-        #     print(p, droneObject.droneName)
-        #     Utils.getClient().simSetVehiclePose(
-        #         p, ignore_collision=True, vehicle_name=droneObject.droneName
-        #     )
-
-        # time.sleep(5) if windows else time.sleep(0.25)
-
         for droneObject in self.droneObjects:
             Utils.getClient().confirmConnection()
             Utils.getClient().enableApiControl(True, droneObject.droneName)
@@ -346,20 +318,9 @@ class Sim(object):
             Utils.getClient().armDisarm(True, droneObject.droneName)
             Utils.getClient().takeoffAsync(vehicle_name=droneObject.droneName).join()
             if windows:
-                time.sleep(1)
-        
-            # Move up 3m
-        # time.sleep(5) if windows else time.sleep(0.25)
+                time.sleep(1)        
         l = []
         for p, droneObject in zip(poses, self.droneObjects):
-            # quad_position = (
-            #     Utils.getClient()
-            #     .getMultirotorState(droneObject.droneName)
-            #     .kinematics_estimated.position
-            # )
-        #     # print(quad_position, start_pos)
-        #     # Utils.getClient().takeoffAsync(vehicle_name=droneObject.droneName).join()
-        #     # Utils.getClient().hoverAsync(vehicle_name=droneObject.droneName).join()
             l.append(Utils.getClient().moveToPositionAsync(
                 p.position.x_val,
                 p.position.y_val,
@@ -367,6 +328,11 @@ class Sim(object):
                 3.0,
                 vehicle_name=droneObject.droneName,
             ))
+        for i in l:
+            i.join()
+        
+        for p, droneObject in zip(poses, self.droneObjects):
+            # resetFuture
             droneObject.currentStep = 0
             currentPos = (
                 Utils.getClient()
@@ -379,18 +345,11 @@ class Sim(object):
 
             droneObject.reseting = False
             droneObject.currentTotalReward = 0
-        #     if windows:
-        #         time.sleep(1)
-        # time.sleep(2)
         
-        for i in l:
-            i.join()
-            
-        # time.sleep(5)
+           
         Utils.getClient().simPause(True)
         
         self.gatherAllObservations()
-        # time.sleep(5) if windows else time.sleep(5)
         
         self.episodes += 1
 
@@ -507,19 +466,19 @@ class Sim(object):
 
                 # Utils.getClient().armDisarm(True, droneObject.droneName)
                 # Utils.getClient().enableApiControl(True, droneObject.droneName)
-                Utils.getClient().simPause(False)
+                # Utils.getClient().simPause(False)
 
 
-                Utils.getClient().moveToPositionAsync(
+                droneObject.resetFuture = Utils.getClient().moveToPositionAsync(
                                 p.position.x_val,
                                 p.position.y_val,
                                 p.position.z_val,
-                                2.0,
+                                4.0,
                                 vehicle_name=droneObject.droneName,
                                 # timeout_sec=10
-                            ).join()
+                            )
                 print("Reset position done")
-                Utils.getClient().simPause(True)
+                # Utils.getClient().simPause(True)
 
                 # Utils.getClient
 
@@ -541,6 +500,13 @@ class Sim(object):
                 == 3
                 # and time.perf_counter() - droneObject.resetingTime > 2
             ):
+                f : Future = droneObject.resetFuture 
+                print("f._result : ", f._result)
+                if f._result is None:
+                    return
+                
+                droneObject.resetFuture = None
+                
                 # Move to estimated state?
                 state = Utils.getClient().getMultirotorState(droneObject.droneName)
 
