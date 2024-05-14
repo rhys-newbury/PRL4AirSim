@@ -306,7 +306,7 @@ class Sim(object):
         poses = [
             airsim.Pose(
                 airsim.Vector3r(*start_poses[i]),
-                airsim.Quaternionr(0.0, 0.0, 0.0, 0.0),
+                airsim.Quaternionr(1.0, 0.0, 0.0, 0.0),
             )
             for i in range(len(self.droneObjects))
         ]
@@ -452,11 +452,11 @@ class Sim(object):
 
                 p = airsim.Pose(
                     airsim.Vector3r(*self.agent_start_pos),
-                    airsim.Quaternionr(0.0, 0.0, 0.0, 1.0),
+                    airsim.Quaternionr(1.0, 0.0, 0.0, 0.0),
                 )
-                # Utils.getClient().simSetVehiclePose(
-                #     p, ignore_collision=True, vehicle_name=droneObject.droneName
-                # )
+                Utils.getClient().simSetVehiclePose(
+                    p, ignore_collision=True, vehicle_name=droneObject.droneName
+                )
                 print("Start reset position")
 
                 # Utils.getClient().client.call_async(

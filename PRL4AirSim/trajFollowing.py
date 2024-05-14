@@ -110,13 +110,13 @@ def main(args):
 
         actionTime = 1
         flying = True
-        client.simPause(False)
+        # client.simPause(False)
 
-        client.reset()
+        # client.reset()
         time.sleep(0.25)
         p = airsim.Pose(
             airsim.Vector3r(-14, 16, -3),
-            airsim.Quaternionr(0.0, 0.0, 0.0, 0.0),
+            airsim.Quaternionr(1.0, 0.0, 0.0, 0.0),
         )
         for _ in range(3):
             
@@ -124,8 +124,8 @@ def main(args):
             client.simSetVehiclePose(
                 p, ignore_collision=True, vehicle_name="Drone0"
             )
-            client.client.call("simSetVehiclePoseBatch", [p], ["Drone0"])
-            time.sleep(10)
+            # client.client.call("simSetVehiclePoseBatch", [p], ["Drone0"])
+            time.sleep(2)
 
             client.enableApiControl(True, vehicle_name="Drone0")
             success = client.armDisarm(True, vehicle_name="Drone0")
